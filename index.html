@@ -1,721 +1,674 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Matias Invest | Minha Organização Financeira</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://unpkg.com/lucide@latest"></script>
 
-
-
     <style>
-
         body { 
-
             font-family: 'Plus Jakarta Sans', sans-serif; 
-
             scroll-behavior: smooth; 
-
         }
-
         .font-logo { font-family: 'Orbitron', sans-serif; }
-
         input[type=number]::-webkit-inner-spin-button,
-
         input[type=number]::-webkit-outer-spin-button {
-
           -webkit-appearance: none;
-
           margin: 0;
-
         }
-
         
-
-        /* Classes para o efeito de deslizar ao rolar a página apenas em seções secundárias */
-
         .reveal {
-
             opacity: 0;
-
             transform: translateY(40px);
-
             transition: all 0.8s ease-out;
-
         }
-
         .reveal.active {
-
             opacity: 1;
-
             transform: translateY(0);
-
         }
-
-
-
-        /* Balão flutuante piscante/mexendo no header */
 
         .balao-oferta {
-
             animation: float-badge 2.5s ease-in-out infinite, glow-badge 2s alternate infinite;
-
             background: linear-gradient(135deg, #a855f7, #3b82f6);
-
         }
-
         @keyframes float-badge {
-
             0% { transform: translateY(0px) scale(1); }
-
             50% { transform: translateY(-6px) scale(1.05); }
-
             100% { transform: translateY(0px) scale(1); }
-
         }
-
         @keyframes glow-badge {
-
             0% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.4); }
-
             100% { box-shadow: 0 0 18px rgba(59, 130, 246, 0.8); }
-
         }
-
-
-
-        /* Estilo customizado do botão de compra */
 
         .btn-gradiente-principal {
-
             background: linear-gradient(135deg, #a855f7, #6366f1);
-
             transition: all 0.3s ease;
-
         }
-
         .btn-gradiente-principal:hover {
-
             transform: translateY(-2px);
-
             box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.5);
-
         }
 
+        /* ── Simulador personalizado ── */
+        .sim-input-wrap {
+            position: relative;
+        }
+        .sim-input-wrap span {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-weight: 800;
+            font-size: 1.1rem;
+            font-family: 'Orbitron', sans-serif;
+            pointer-events: none;
+        }
+        #input-valor-total {
+            width: 100%;
+            background: rgba(2, 6, 23, 0.8);
+            border: 2px solid rgba(139, 92, 246, 0.35);
+            border-radius: 14px;
+            padding: 16px 16px 16px 52px;
+            color: #22d3ee;
+            font-size: 1.35rem;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        #input-valor-total:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.18);
+        }
+        #input-valor-total::placeholder { color: rgba(148,163,184,0.4); }
+
+        .inv-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(15, 8, 40, 0.7);
+            border: 1px solid rgba(139, 92, 246, 0.18);
+            border-radius: 14px;
+            padding: 14px 16px;
+            transition: border-color 0.2s;
+        }
+        .inv-row.visible { border-color: rgba(139, 92, 246, 0.45); }
+        .inv-row:hover.visible { border-color: rgba(168, 85, 247, 0.65); }
+
+        .inv-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .inv-icon.purple { background: rgba(139, 92, 246, 0.15); }
+        .inv-icon.cyan   { background: rgba(34, 211, 238, 0.10); }
+        .inv-icon.locked { background: rgba(51, 65, 85, 0.5); }
+
+        .inv-ticker {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .inv-ticker.purple { color: #c4b5fd; }
+        .inv-ticker.cyan   { color: #22d3ee; }
+        .inv-ticker.locked { color: #475569; }
+
+        .blur-text {
+            filter: blur(7px);
+            user-select: none;
+            pointer-events: none;
+            color: #94a3b8;
+        }
+
+        .lock-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(51, 65, 85, 0.6);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 20px;
+            padding: 2px 9px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #64748b;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .pct-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+        .pct-badge.purple { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+        .pct-badge.cyan   { background: rgba(34,211,238,0.10); color: #22d3ee; }
+        .pct-badge.locked { background: rgba(51,65,85,0.4);   color: #475569; }
+
+        .valor-resultado {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #f8fafc;
+            white-space: nowrap;
+            text-align: right;
+        }
+
+        .unlock-cta {
+            background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(99,102,241,0.08));
+            border: 1px solid rgba(139,92,246,0.35);
+            border-radius: 16px;
+            padding: 22px 20px;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        @keyframes pulse-ring {
+            0%   { box-shadow: 0 0 0 0 rgba(168,85,247,0.5); }
+            70%  { box-shadow: 0 0 0 10px rgba(168,85,247,0); }
+            100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
+        }
+        .btn-unlock {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 13px 28px;
+            border-radius: 12px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulse-ring 2.4s ease-out infinite;
+        }
+        .btn-unlock:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -6px rgba(168,85,247,0.5);
+        }
+
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(139,92,246,0.4), transparent);
+            margin: 6px 0 14px;
+        }
+
+        .sim-section-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .zero-state-sim {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 0;
+            gap: 12px;
+            color: #475569;
+        }
+        .zero-state-sim svg {
+            opacity: 0.35;
+        }
     </style>
-
 </head>
-
 <body class="bg-gradient-to-b from-[#12072B] via-[#090A1A] to-[#050510] text-slate-100 min-h-screen pb-12">
-
     <div class="max-w-2xl mx-auto px-4">
-
         
-
         <header class="sticky top-0 z-50 bg-[#12072B]/80 backdrop-blur-md border-b border-purple-950/40 py-4 mb-6 flex justify-between items-center">
-
             <h1 class="font-logo text-2xl font-black tracking-wider bg-gradient-to-r from-white to-cyan-400 bg-clip-text text-transparent">
-
                 MATIAS INVEST
-
             </h1>
-
             <a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="balao-oferta text-xs font-black text-white uppercase tracking-wider px-4 py-2 rounded-full flex items-center gap-1.5 transition border border-white/20">
-
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-
                 LIBERAR POR R$ 39,90
-
             </a>
-
         </header>
 
-
-
         <main class="space-y-12">
-
             
-
             <section class="pt-4 border-b border-purple-950/30 pb-10">
-
                 <div class="flex flex-col items-center text-center">
-
                     <div class="w-32 h-32 rounded-full bg-gradient-to-br from-purple-500 via-cyan-500 to-blue-600 p-1 mb-6 shadow-xl shadow-purple-500/10">
-
                         <img src="rosto.jpg" alt="Bernardo Matias" class="w-full h-full rounded-full object-cover">
-
                     </div>
-
                     <p class="text-cyan-400 text-sm font-medium mb-1">Olá, meu nome é</p>
-
                     <h1 class="font-logo text-4xl font-black text-white mb-2">Bernardo Matias.</h1>
-
                     <h2 class="text-xl text-purple-300 font-bold mb-4">Eu organizo minhas finanças com foco no futuro.</h2>
-
                     <p class="text-sm text-slate-400 max-w-md leading-relaxed">
-
                         Sou um investidor individual e entusiasta da educação financeira. Compartilho a minha rotina pessoal, poupança e a exata metodologia que utilizo para gerenciar e distribuir as minhas economias.
-
                     </p>
-
                 </div>
-
             </section>
-
-
 
             <section class="bg-slate-950/60 rounded-2xl p-6 border border-purple-950/40 shadow-xl shadow-purple-500/10 space-y-6 text-center backdrop-blur-sm">
-
                 <div>
-
                     <h2 class="text-xl md:text-2xl font-extrabold text-white tracking-tight">
-
                         Quer ver como eu distribuo e organizo minhas economias de mais de <span class="text-cyan-400">R$ 30.000</span> com apenas 18 anos?
-
                     </h2>
-
                     <p class="text-xs text-slate-400 mt-2">Veja abaixo como fica o painel da minha estratégia pessoal:</p>
-
                 </div>
-
-
 
                 <div class="w-full rounded-xl overflow-hidden border border-purple-900/30 bg-slate-900/50 flex items-center justify-center min-h-[200px] shadow-inner">
-
                     <img src="foto.jpg" alt="Print do Patrimônio" class="w-full h-auto object-cover max-h-[400px]" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-
                     <div class="hidden flex-col items-center p-8 text-slate-500">
-
                         <i data-lucide="image" class="w-12 h-12 mb-2 text-slate-700"></i>
-
                         <p class="text-xs">[Insira a imagem 'foto.jpg' para carregar seu print aqui]</p>
-
                     </div>
-
                 </div>
-
             </section>
-
-
 
             <section class="bg-gradient-to-r from-purple-950/40 to-slate-950/60 p-6 rounded-2xl border border-purple-900/30 space-y-4">
-
                 <h3 class="text-base font-black font-logo text-white tracking-wide flex items-center gap-2">
-
                     <i data-lucide="info" class="w-5 h-5 text-cyan-400"></i> O QUE VOCÊ VAI RECEBER PARA ESTUDO:
-
                 </h3>
-
                 <p class="text-xs text-slate-400 leading-relaxed">
-
                     Você terá acesso educacional à divisão percentual e estrutural que eu utilizo na minha própria jornada financeira. Um modelo prático focado em organização e divisão inteligente de capital.
-
                 </p>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
-
                     <div class="flex items-center gap-2 text-slate-300"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i> Como divido minha Renda Fixa para proteção</div>
-
                     <div class="flex items-center gap-2 text-slate-300"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i> Minha visão pessoal sobre Ativos de Renda Variável</div>
-
                     <div class="flex items-center gap-2 text-slate-300"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i> Exemplo prático de divisão para aportes baixos</div>
-
                     <div class="flex items-center gap-2 text-slate-300"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i> Planilha didática de simulação de rebalanceamento</div>
-
                 </div>
-
             </section>
-
-
 
             <section class="reveal space-y-4">
-
                 <h2 class="font-logo text-sm font-bold text-slate-400 tracking-widest uppercase flex items-center gap-3">
-
                     <div class="h-px w-8 bg-purple-500"></div>
-
                     Pilares do Meu Modelo Didático
-
                 </h2>
-
                 <div class="space-y-3">
-
                     <div class="bg-slate-950/40 p-4 rounded-xl border border-purple-950/20">
-
                         <div class="flex items-start gap-4">
-
                             <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
-
                                 <i data-lucide="scan-line" class="w-5 h-5 text-cyan-400"></i>
-
                             </div>
-
                             <div>
-
                                 <h3 class="text-sm font-bold text-white mb-1">Organização Pessoal Clara</h3>
-
                                 <p class="text-xs text-slate-400">Entenda os conceitos fundamentais para separar seu dinheiro por metas e objetivos pessoais, gerando mais disciplina de forma independente.</p>
-
                             </div>
-
                         </div>
-
                     </div>
-
                     <div class="bg-slate-950/40 p-4 rounded-xl border border-purple-950/20">
-
                         <div class="flex items-start gap-4">
-
                             <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
-
                                 <i data-lucide="pie-chart" class="w-5 h-5 text-purple-400"></i>
-
                             </div>
-
                             <div>
-
                                 <h3 class="text-sm font-bold text-white mb-1">Noções de Diversificação Didática</h3>
-
                                 <p class="text-xs text-slate-400">Estude como funciona o equilíbrio entre diferentes classes de ativos no mercado, aprendendo a lógica por trás da proteção de capital.</p>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </section>
 
-
-
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!--                  SIMULADOR EDUCACIONAL                  -->
+            <!-- ═══════════════════════════════════════════════════════ -->
             <section id="simulador-carteira" class="reveal space-y-6">
-
                 
-
                 <div class="bg-gradient-to-r from-purple-950/50 to-slate-900/50 rounded-2xl p-5 border border-purple-500/20 text-center space-y-2">
-
                     <span class="text-xs font-black tracking-widest text-cyan-400 uppercase font-logo flex items-center justify-center gap-1.5">
-
                         <i data-lucide="help-circle" class="w-4 h-4"></i> DINÂMICA DA FERRAMENTA
-
                     </span>
-
                     <h3 class="text-lg font-bold text-white">Como a simulação funciona na prática?</h3>
-
                     <p class="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-
                         É simples: você <strong class="text-cyan-400">digita um valor</strong> hipotético na calculadora abaixo e o sistema ilustra de forma automatizada como funcionaria a divisão proporcional seguindo os meus critérios de estudo.
-
                     </p>
-
                     <div class="flex justify-center pt-2 animate-bounce">
-
                         <i data-lucide="arrow-down" class="w-6 h-6 text-purple-400"></i>
-
                     </div>
-
                 </div>
 
+                <!-- Card principal do simulador -->
+                <div class="bg-[#130d35]/70 p-6 md:p-8 rounded-3xl border border-purple-500/30 shadow-2xl space-y-6 backdrop-blur-sm">
 
-
-                <div class="bg-[#130d35]/60 p-6 md:p-8 rounded-3xl border border-purple-500/30 shadow-2xl space-y-6">
-
+                    <!-- Cabeçalho -->
                     <div class="flex justify-between items-center border-b border-purple-900/40 pb-4">
-
                         <div>
-
                             <h2 class="text-base font-extrabold text-white uppercase tracking-wider font-logo">Simulador Educacional</h2>
-
-                            <p class="text-xs text-purple-300">Simule uma distribuição com base nos meus estudos</p>
-
+                            <p class="text-xs text-purple-300 mt-0.5">Simule uma distribuição com base nos meus estudos</p>
                         </div>
-
                         <div class="text-right">
-
                             <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Valor Digitado</div>
-
                             <div id="valor-aporte-display" class="text-xl font-black text-cyan-400 font-logo">R$ 0,00</div>
-
                         </div>
-
                     </div>
 
-
-
+                    <!-- Input -->
                     <div class="space-y-3">
-
                         <label class="text-sm font-bold text-slate-300 block">Digite o valor que você quer simular (Ex: R$ 20,00):</label>
-
-                        <div class="relative">
-
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-extrabold text-lg">R$</span>
-
-                            <input type="text" id="input-valor-total" placeholder="0,00" class="w-full bg-slate-950/80 border-2 border-purple-900/60 rounded-xl pl-12 pr-4 py-4 text-white text-xl font-black font-logo focus:outline-none focus:border-purple-500 transition shadow-inner">
-
+                        <div class="sim-input-wrap">
+                            <span>R$</span>
+                            <input type="text" id="input-valor-total" placeholder="0,00" inputmode="decimal">
                         </div>
-
                     </div>
 
+                    <!-- Aviso legal -->
+                    <div class="flex items-start gap-3 bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5"></i>
+                        <p class="text-xs text-amber-200/70 leading-relaxed">
+                            <strong class="text-amber-300">Estes são os meus investimentos pessoais.</strong> A distribuição abaixo reflete exclusivamente as minhas escolhas de estudo e patrimônio. <strong class="text-amber-300">Não é indicação de investimento.</strong> Cada pessoa possui perfil, objetivos e tolerância ao risco diferentes.
+                        </p>
+                    </div>
 
-
-                    <div class="bg-[#0b061f] border border-purple-500/40 rounded-2xl p-6 md:p-8 text-center space-y-6 shadow-2xl relative overflow-hidden">
-
-                        
-
-                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-[11px] font-black tracking-widest text-purple-300 uppercase mx-auto">
-
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
-
-                            OFERTA DE LANÇAMENTO
-
+                    <!-- Lista de investimentos -->
+                    <div id="lista-investimentos">
+                        <div class="zero-state-sim">
+                            <i data-lucide="bar-chart-2" class="w-12 h-12"></i>
+                            <p class="text-sm font-medium">Digite um valor para ver minha distribuição</p>
+                            <p class="text-xs text-slate-600">Os investimentos aparecerão aqui</p>
                         </div>
+                    </div>
 
-
+                    <!-- Oferta de acesso -->
+                    <div class="bg-[#0b061f] border border-purple-500/40 rounded-2xl p-6 md:p-8 text-center space-y-6 relative overflow-hidden">
+                        
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-[11px] font-black tracking-widest text-purple-300 uppercase mx-auto">
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+                            OFERTA DE LANÇAMENTO
+                        </div>
 
                         <div>
-
                             <h3 class="text-xl md:text-2xl font-black text-white tracking-tight">
-
                                 Acesso ao Modelo e Planilha de Estudos
-
                             </h3>
-
                         </div>
-
-
 
                         <div class="text-left space-y-3 max-w-md mx-auto py-2">
-
                             <div class="flex items-start gap-3">
-
                                 <div class="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 font-bold"></i>
-
                                 </div>
-
                                 <p class="text-sm md:text-base text-slate-300 font-medium">
-
                                     <strong class="text-white">Foco Didático Puro:</strong> Uma maneira simples de entender finanças básicas sem termos complexos.
-
                                 </p>
-
                             </div>
-
                             <div class="flex items-start gap-3">
-
                                 <div class="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 font-bold"></i>
-
                                 </div>
-
                                 <p class="text-sm md:text-base text-slate-300 font-medium">
-
                                     <strong class="text-white">Veja a minha divisão:</strong> Descubra de forma ilustrativa quais classes e ideias norteiam minhas escolhas financeiras.
-
                                 </p>
-
                             </div>
-
                             <div class="flex items-start gap-3">
-
                                 <div class="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-
                                     <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 font-bold"></i>
-
                                 </div>
-
                                 <p class="text-sm md:text-base text-slate-300 font-medium">
-
                                     <strong class="text-white">Estudo de Plataformas:</strong> Saiba quais caminhos utilizo no meu cotidiano para as movimentações de exemplo.
-
                                 </p>
-
                             </div>
-
                         </div>
-
-
 
                         <div class="bg-[#140e2d] rounded-2xl p-5 max-w-sm mx-auto border border-purple-900/60">
-
                             <p class="text-xs text-slate-400 font-semibold mb-1">
-
                                 De <span class="line-through text-slate-500">R$ 97</span> · Por apenas
-
                             </p>
-
                             <div class="text-4xl md:text-5xl font-black text-white font-logo tracking-tight my-1 bg-gradient-to-r from-white via-purple-300 to-white bg-clip-text text-transparent">
-
                                 R$ 39,90
-
                             </div>
-
                             <p class="text-[11px] text-purple-300 font-medium tracking-wide mt-1">
-
                                 Pagamento único · Acesso imediato ao material de estudos
-
                             </p>
-
                         </div>
-
                         
-
                         <div class="max-w-sm mx-auto pt-2">
-
                             <a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="btn-gradiente-principal w-full py-4 px-6 rounded-2xl text-white font-bold text-base md:text-lg flex items-center justify-center gap-2 shadow-xl shadow-purple-500/10 uppercase tracking-wider">
-
                                 Quero ter acesso para estudar
-
                                 <i data-lucide="arrow-right" class="w-5 h-5"></i>
-
                             </a>
-
                         </div>
-
-
 
                         <div class="flex items-center justify-center gap-6 text-[11px] text-slate-500 pt-2 border-t border-purple-950/50">
-
                             <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> 7 dias de garantia</span>
-
                             <span class="flex items-center gap-1"><i data-lucide="lock" class="w-4 h-4 text-purple-500"></i> Pagamento seguro</span>
-
                         </div>
 
-
-
                     </div>
-
                 </div>
-
             </section>
-
-
 
             <section class="reveal space-y-4">
-
                 <h2 class="font-logo text-sm font-bold text-slate-400 tracking-widest uppercase flex items-center gap-3">
-
                     <div class="h-px w-8 bg-purple-500"></div>
-
                     Opiniões de quem já estuda o material
-
                 </h2>
-
                 
-
                 <div class="grid grid-cols-1 gap-3">
-
                     <div class="bg-slate-950/50 p-4 rounded-xl border border-purple-950/10 space-y-2">
-
                         <div class="flex justify-between items-center">
-
                             <span class="text-xs font-bold text-white">Rodrigo S.</span>
-
                             <div class="flex text-amber-400">
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                             </div>
-
                         </div>
-
                         <p class="text-xs text-slate-400 italic">
-
                             "O material didático vale muito a pena pelo valor cobrado. Eu estava confuso sobre as divisões básicas de finanças e consegui entender bem como estruturar e organizar minhas metas."
-
                         </p>
-
                     </div>
 
-
-
                     <div class="bg-slate-950/50 p-4 rounded-xl border border-purple-950/10 space-y-2">
-
                         <div class="flex justify-between items-center">
-
                             <span class="text-xs font-bold text-white">Amanda Costa</span>
-
                             <div class="flex text-amber-400">
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                             </div>
-
                         </div>
-
                         <p class="text-xs text-slate-400 italic">
-
                             "Ver como ele organiza o próprio patrimônio me deu ótimos insights para os meus estudos. Usei as ideias de proporção para aplicar na minha própria planilha. Prático e bem ilustrativo."
-
                         </p>
-
                     </div>
-
-
 
                     <div class="bg-slate-950/50 p-4 rounded-xl border border-purple-950/10 space-y-2">
-
                         <div class="flex justify-between items-center">
-
                             <span class="text-xs font-bold text-white">Marcos Vinícius</span>
-
                             <div class="flex text-amber-400">
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-
                             </div>
-
                         </div>
-
                         <p class="text-xs text-slate-400 italic">
-
                             "Excelente modelo de visão patrimonial. Entender a lógica que o Bernardo usa para o rebalanceamento no modelo dele me ajudou muito a clarear minha mente sobre finanças pessoais."
-
                         </p>
-
                     </div>
-
                 </div>
-
             </section>
-
-
 
         </main>
 
-
-
         <footer class="mt-12 pt-6 border-t border-purple-950/40 text-center text-[10px] text-slate-500 space-y-2">
-
             <p>&copy; 2026 Matias Invest. Todos os direitos reservados.</p>
-
             <p class="leading-relaxed max-w-xl mx-auto italic text-justify md:text-center text-slate-600">
-
                 <strong>AVISO LEGAL IMPORTANTE:</strong> O conteúdo deste site e do material disponibilizado possui finalidade exclusivamente educativa, informativa e de registro de jornada pessoal. O proprietário do site não possui certificação de consultor, analista ou gestor de valores mobiliários (CNPI, CEA, CGA) e não realiza atividade restrita nos termos da regulamentação da CVM. Nenhuma informação aqui contida constitui recomendação, indicação, oferta ou solicitação de compra ou venda de ações, fundos imobiliários, títulos de renda fixa ou qualquer outro ativo financeiro. Investimentos envolvem riscos e rentabilidade passada não garante resultados futuros.
-
             </p>
-
         </footer>
-
     </div>
 
-
-
     <script>
-
         lucide.createIcons();
 
-
-
+        /* ── reveal on scroll ── */
         function reveal() {
-
-            const reveals = document.querySelectorAll(".reveal");
-
-            for (let i = 0; i < reveals.length; i++) {
-
-                let windowHeight = window.innerHeight;
-
-                let elementTop = reveals[i].getBoundingClientRect().top;
-
-                let elementVisible = 100;
-
-                
-
-                if (elementTop < windowHeight - elementVisible) {
-
-                    reveals[i].classList.add("active");
-
-                }
-
-            }
-
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100)
+                    el.classList.add("active");
+            });
         }
-
         window.addEventListener("scroll", reveal);
-
         window.addEventListener("DOMContentLoaded", reveal);
 
+        /* ── dados dos investimentos ── */
+        const investimentos = [
+            { ticker: 'WIZC3',  nome: 'Wiz Co',        tipo: 'Ação · Renda Variável',      pct: 35, visivel: true,  cor: 'purple', icone: 'trending-up'    },
+            { ticker: 'BRBI11', nome: 'BR Bitcoin BDR', tipo: 'BDR · Renda Variável',       pct: 30, visivel: true,  cor: 'cyan',   icone: 'bitcoin'        },
+            { ticker: '██████', nome: '████████████',   tipo: 'Tesouro · Renda Fixa',       pct: 20, visivel: false, cor: 'locked', icone: 'lock'           },
+            { ticker: '██████', nome: '████████████',   tipo: 'FII · Renda Variável',       pct: 10, visivel: false, cor: 'locked', icone: 'lock'           },
+            { ticker: '██████', nome: '████████████',   tipo: 'CDB · Renda Fixa',           pct: 5,  visivel: false, cor: 'locked', icone: 'lock'           },
+        ];
 
-
-        function formatarMoeda(input) {
-
-            let valor = input.value.replace(/\D/g, '');
-
-            if (valor === '') {
-
+        /* ── formatar input ── */
+        function formatarInput(input) {
+            let raw = input.value.replace(/\D/g, '');
+            if (!raw) {
                 input.value = '';
-
                 document.getElementById('valor-aporte-display').innerText = 'R$ 0,00';
-
+                renderizar(0);
                 return;
-
             }
-
-            valor = (parseInt(valor) / 100).toFixed(2);
-
-            valor = valor.replace('.', ',');
-
-            valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-            input.value = valor;
-
-            document.getElementById('valor-aporte-display').innerText = 'R$ ' + valor;
-
+            let num = parseInt(raw) / 100;
+            let fmt = num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            input.value = fmt;
+            document.getElementById('valor-aporte-display').innerText = 'R$ ' + fmt;
+            renderizar(num);
         }
 
+        function fmtBR(n) {
+            return n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
 
+        /* ── renderizar lista ── */
+        function renderizar(total) {
+            const container = document.getElementById('lista-investimentos');
+
+            if (total <= 0) {
+                container.innerHTML = `
+                <div class="zero-state-sim">
+                    <i data-lucide="bar-chart-2" class="w-12 h-12"></i>
+                    <p class="text-sm font-medium">Digite um valor para ver minha distribuição</p>
+                    <p class="text-xs text-slate-600">Os investimentos aparecerão aqui</p>
+                </div>`;
+                lucide.createIcons();
+                return;
+            }
+
+            /* Barra de progresso visual */
+            const barra = investimentos.map(inv => {
+                const cor = inv.cor === 'purple' ? '#a855f7' : inv.cor === 'cyan' ? '#22d3ee' : '#334155';
+                return `<div style="height:100%; width:${inv.pct}%; background:${cor}; opacity:${inv.visivel ? 1 : 0.4};"></div>`;
+            }).join('');
+
+            let html = `
+            <div style="display:flex; height:6px; border-radius:99px; overflow:hidden; gap:2px; margin-bottom:20px;">
+                ${barra}
+            </div>`;
+
+            /* Visíveis */
+            html += `<p class="sim-section-label">Meus investimentos (revelados)</p>`;
+            html += `<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">`;
+            investimentos.filter(i => i.visivel).forEach(inv => {
+                const val = (total * inv.pct) / 100;
+                html += `
+                <div class="inv-row visible">
+                    <div class="inv-icon ${inv.cor}">
+                        <i data-lucide="${inv.icone}" style="width:18px;height:18px;color:${inv.cor === 'purple' ? '#c4b5fd' : '#22d3ee'}"></i>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                        <div class="inv-ticker ${inv.cor}">${inv.ticker}</div>
+                        <div style="font-size:11px;color:#64748b;margin-top:2px;">${inv.nome} · ${inv.tipo}</div>
+                    </div>
+                    <div style="text-align:right;flex-shrink:0;">
+                        <span class="pct-badge ${inv.cor}">${inv.pct}%</span>
+                        <div class="valor-resultado" style="margin-top:5px;">R$ ${fmtBR(val)}</div>
+                    </div>
+                </div>`;
+            });
+            html += `</div>`;
+
+            /* Linha divisória */
+            html += `<div class="divider-line"></div>`;
+
+            /* Bloqueados */
+            html += `<p class="sim-section-label">Outros ativos do meu portfólio</p>`;
+            html += `<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">`;
+            investimentos.filter(i => !i.visivel).forEach(inv => {
+                const val = (total * inv.pct) / 100;
+                html += `
+                <div class="inv-row">
+                    <div class="inv-icon locked">
+                        <i data-lucide="lock" style="width:16px;height:16px;color:#475569"></i>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                        <div class="blur-text inv-ticker locked" style="font-family:'Orbitron',sans-serif;font-size:0.82rem;">${inv.ticker}</div>
+                        <div style="font-size:11px;color:#374151;margin-top:2px;">${inv.tipo}</div>
+                        <span class="lock-pill">
+                            <i data-lucide="lock" style="width:10px;height:10px;"></i> Bloqueado
+                        </span>
+                    </div>
+                    <div style="text-align:right;flex-shrink:0;">
+                        <span class="pct-badge locked">${inv.pct}%</span>
+                        <div class="valor-resultado blur-text" style="margin-top:5px;">R$ ${fmtBR(val)}</div>
+                    </div>
+                </div>`;
+            });
+            html += `</div>`;
+
+            /* Total */
+            html += `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid rgba(139,92,246,0.2);">
+                <span style="font-size:12px;color:#64748b;font-weight:600;">TOTAL SIMULADO</span>
+                <span style="font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:#22d3ee;">R$ ${fmtBR(total)}</span>
+            </div>`;
+
+            /* CTA desbloqueio */
+            html += `
+            <div class="unlock-cta">
+                <p style="font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">
+                    <i data-lucide="eye-off" style="display:inline;width:13px;height:13px;vertical-align:-2px;margin-right:4px;"></i>
+                    ${investimentos.filter(i=>!i.visivel).length} investimentos estão ocultos
+                </p>
+                <p style="font-size:13px;color:#94a3b8;margin-bottom:16px;line-height:1.5;">
+                    Descubra todos os ativos do meu portfólio, os percentuais exatos e a lógica por trás de cada escolha no material completo.
+                </p>
+                <a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="btn-unlock">
+                    <i data-lucide="lock-open" style="width:16px;height:16px;"></i>
+                    Desbloquear por R$ 39,90
+                </a>
+            </div>`;
+
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
 
         document.getElementById('input-valor-total').addEventListener('input', function() {
-
-            formatarMoeda(this);
-
+            formatarInput(this);
         });
-
     </script>
-
 </body>
-
 </html>
