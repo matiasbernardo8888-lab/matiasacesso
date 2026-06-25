@@ -82,7 +82,7 @@ body::before{
   min-height:100svh;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
   text-align:center;
-  padding:100px 32px 80px;
+  padding:100px 32px 120px;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -94,11 +94,10 @@ body::before{
 }
 .hero-title{
   font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(2.4rem,7vw,6rem);
-  line-height:.93;letter-spacing:-.025em;
-  margin-bottom:28px;
+  font-size:clamp(1.9rem,6vw,6rem);
+  line-height:.95;letter-spacing:-.02em;
+  margin-bottom:24px;
   animation:fade-up .8s ease both .1s;
-  word-break:keep-all;
 }
 .hero-title .line1{display:block;color:var(--white)}
 .hero-title .line2{
@@ -115,6 +114,7 @@ body::before{
 .hero-actions{
   display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
   animation:fade-up .8s ease both .26s;
+  margin-bottom:16px;
 }
 .btn-primary{
   display:inline-flex;align-items:center;gap:9px;
@@ -417,14 +417,17 @@ footer p{font-size:.65rem;color:rgba(82,73,110,.7);line-height:1.75;max-width:58
 }
 @media(max-width:640px){
   #header{padding:14px 20px}
-  #hero{padding:90px 20px 70px}
-  .hero-title{font-size:clamp(2.2rem,11vw,3.2rem)}
+  #hero{padding:90px 20px 120px}
+  .hero-eyebrow{font-size:.55rem;padding:4px 12px}
+  .hero-title{font-size:clamp(1.75rem,9.5vw,2.4rem);line-height:1;margin-bottom:20px}
+  .hero-sub{font-size:.88rem;margin-bottom:32px}
   #features,#simulador,#checkout,#testimonials{padding:70px 20px}
   .checkout-card{padding:32px 22px}
   .sim-card{padding:28px 20px}
   .features-grid{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column;align-items:center}
-  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .hero-actions{flex-direction:column;align-items:stretch;width:100%;max-width:320px;gap:10px}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center;padding:14px 24px}
+  .scroll-hint{bottom:28px}
 }
 </style>
 </head>
@@ -454,7 +457,7 @@ footer p{font-size:.65rem;color:rgba(82,73,110,.7);line-height:1.75;max-width:58
     <span class="line2">PATRIMÔNIO</span>
   </h1>
   <p class="hero-sub">
-    A metodologia real de distribuição e rebalanceamento de capital que gerou mais de <strong>R$&nbsp;30.000</strong> em patrimônio organizado com apenas 18 anos.
+    A metodologia real de quem saiu do zero e construiu um patrimônio organizado — distribuindo capital com critério, rebalanceando com consistência e tomando cada decisão com intenção.
   </p>
   <div class="hero-actions">
     <a href="#simulador" class="btn-primary">
