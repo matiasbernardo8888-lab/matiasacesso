@@ -6,21 +6,20 @@
 <title>MATIAS INVEST — Organização Financeira do Futuro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#03010A;
-  --bg2:#070415;
-  --teal:#00FFD1;
+  --bg:#040108;
+  --teal:#00F5C4;
   --teal2:#00C2A0;
   --violet:#7B2FFF;
   --violet2:#5B1FCC;
   --pink:#FF2CF0;
-  --white:#F0EEF8;
-  --muted:#4A4565;
-  --border:rgba(123,47,255,0.22);
-  --glass:rgba(7,4,21,0.7);
+  --white:#EEEAF8;
+  --muted:#52496E;
+  --border:rgba(123,47,255,0.18);
+  --glass:rgba(10,6,28,0.75);
 }
 html{scroll-behavior:smooth}
 body{
@@ -30,706 +29,402 @@ body{
   overflow-x:hidden;
   min-height:100vh;
 }
-::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--violet);border-radius:99px}
 
+/* grid bg */
 body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:
-    linear-gradient(rgba(123,47,255,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(123,47,255,.03) 1px,transparent 1px);
-  background-size:44px 44px;
-  pointer-events:none;z-index:0;
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(123,47,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(123,47,255,.025) 1px,transparent 1px);
+  background-size:52px 52px;pointer-events:none;z-index:0;
 }
-.orb{
-  position:fixed;border-radius:50%;filter:blur(90px);
-  pointer-events:none;z-index:0;opacity:.35;
-  animation:orb-drift 18s ease-in-out infinite alternate;
-}
-.orb1{width:500px;height:500px;background:radial-gradient(circle,var(--violet),transparent 70%);top:-150px;left:-150px}
-.orb2{width:400px;height:400px;background:radial-gradient(circle,var(--teal),transparent 70%);bottom:-100px;right:-100px;animation-delay:-9s}
-.orb3{width:300px;height:300px;background:radial-gradient(circle,var(--pink),transparent 70%);top:40%;left:60%;animation-delay:-4s;opacity:.18}
-@keyframes orb-drift{
-  0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(40px,30px) scale(1.12)}
-}
+
+/* orbs */
+.orb{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;animation:orb-drift 20s ease-in-out infinite alternate}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(123,47,255,.28),transparent 70%);top:-200px;left:-200px;opacity:1}
+.orb2{width:450px;height:450px;background:radial-gradient(circle,rgba(0,245,196,.22),transparent 70%);bottom:-150px;right:-150px;animation-delay:-10s;opacity:1}
+.orb3{width:280px;height:280px;background:radial-gradient(circle,rgba(255,44,240,.15),transparent 70%);top:35%;left:55%;animation-delay:-5s;opacity:1}
+@keyframes orb-drift{0%{transform:translate(0,0)}100%{transform:translate(35px,25px)}}
 
 /* HEADER */
 #header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:18px 32px;
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:16px 40px;
   display:flex;justify-content:space-between;align-items:center;
-  background:rgba(3,1,10,.8);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+  background:rgba(4,1,8,.85);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(123,47,255,.12);
 }
 .logo{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;
-  letter-spacing:.12em;
-  background:linear-gradient(90deg,var(--teal),var(--violet),var(--pink));
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;
+  letter-spacing:.14em;
+  background:linear-gradient(90deg,var(--teal) 0%,var(--violet) 50%,var(--pink) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .header-cta{
-  display:flex;align-items:center;gap:8px;
-  background:linear-gradient(135deg,var(--violet),var(--violet2));
-  color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;padding:10px 20px;border-radius:99px;
-  text-decoration:none;border:1px solid rgba(255,255,255,.15);
-  transition:transform .2s,box-shadow .2s;
-  position:relative;overflow:hidden;
+  display:flex;align-items:center;gap:7px;
+  background:var(--violet);
+  color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;padding:9px 20px;border-radius:99px;
+  text-decoration:none;
+  transition:background .2s,box-shadow .2s,transform .2s;
+  white-space:nowrap;
 }
-.header-cta::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--pink),var(--violet));
-  opacity:0;transition:opacity .3s;
-}
-.header-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(123,47,255,.5)}
-.header-cta:hover::before{opacity:1}
-.header-cta span{position:relative;z-index:1}
-.pulse-dot{width:7px;height:7px;border-radius:50%;background:#00FFD1;animation:pulse-g 1.5s ease-in-out infinite;position:relative;z-index:1}
-@keyframes pulse-g{0%,100%{box-shadow:0 0 0 0 rgba(0,255,209,.6)}50%{box-shadow:0 0 0 6px rgba(0,255,209,0)}}
+.header-cta:hover{background:var(--violet2);box-shadow:0 6px 24px rgba(123,47,255,.45);transform:translateY(-1px)}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse-g 1.6s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse-g{0%,100%{box-shadow:0 0 0 0 rgba(0,245,196,.55)}50%{box-shadow:0 0 0 5px rgba(0,245,196,0)}}
 
 /* HERO */
 #hero{
   position:relative;z-index:1;
   min-height:100svh;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:120px 24px 80px;
+  text-align:center;
+  padding:100px 32px 80px;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  border:1px solid rgba(0,255,209,.25);border-radius:99px;
-  padding:6px 18px;font-size:.65rem;letter-spacing:.2em;
-  color:var(--teal);font-weight:700;text-transform:uppercase;
-  margin-bottom:28px;background:rgba(0,255,209,.05);
-  animation:fade-in .8s ease both;
+  border:1px solid rgba(0,245,196,.2);border-radius:99px;
+  padding:5px 16px;font-size:.62rem;letter-spacing:.22em;
+  color:var(--teal);font-weight:600;text-transform:uppercase;
+  margin-bottom:32px;background:rgba(0,245,196,.04);
+  animation:fade-in .7s ease both;
 }
 .hero-title{
   font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(2.8rem,8vw,6.5rem);
-  line-height:.95;letter-spacing:-.02em;
-  margin-bottom:24px;
-  animation:fade-up .9s ease both .1s;
+  font-size:clamp(2.4rem,7vw,6rem);
+  line-height:.93;letter-spacing:-.025em;
+  margin-bottom:28px;
+  animation:fade-up .8s ease both .1s;
+  word-break:keep-all;
 }
 .hero-title .line1{display:block;color:var(--white)}
 .hero-title .line2{
   display:block;
-  background:linear-gradient(90deg,var(--teal),var(--violet),var(--pink));
+  background:linear-gradient(100deg,var(--teal),var(--violet) 55%,var(--pink));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .hero-sub{
-  font-size:1rem;color:rgba(240,238,248,.5);max-width:520px;
-  line-height:1.7;margin-bottom:40px;
-  animation:fade-up .9s ease both .2s;
+  font-size:.95rem;color:rgba(238,234,248,.45);max-width:480px;
+  line-height:1.75;margin-bottom:44px;
+  animation:fade-up .8s ease both .18s;
 }
+.hero-sub strong{color:var(--teal)}
 .hero-actions{
-  display:flex;flex-wrap:wrap;gap:14px;justify-content:center;
-  animation:fade-up .9s ease both .3s;
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
+  animation:fade-up .8s ease both .26s;
 }
 .btn-primary{
-  display:inline-flex;align-items:center;gap:10px;
-  background:linear-gradient(135deg,var(--teal),var(--teal2));
-  color:#03010A;font-weight:700;font-size:.9rem;
-  padding:16px 32px;border-radius:14px;text-decoration:none;
-  letter-spacing:.04em;transition:transform .2s,box-shadow .2s;
-  box-shadow:0 0 30px rgba(0,255,209,.25);
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--teal);
+  color:#040108;font-weight:700;font-size:.85rem;
+  padding:15px 30px;border-radius:12px;text-decoration:none;
+  letter-spacing:.03em;transition:box-shadow .2s,transform .2s;
 }
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,255,209,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,245,196,.35)}
 .btn-secondary{
-  display:inline-flex;align-items:center;gap:10px;
-  background:transparent;color:var(--white);font-weight:600;font-size:.9rem;
-  padding:16px 32px;border-radius:14px;text-decoration:none;
-  border:1px solid var(--border);transition:border-color .2s,background .2s;
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:rgba(238,234,248,.7);font-weight:500;font-size:.85rem;
+  padding:15px 28px;border-radius:12px;text-decoration:none;
+  border:1px solid rgba(123,47,255,.28);transition:border-color .2s,background .2s;
 }
-.btn-secondary:hover{border-color:var(--violet);background:rgba(123,47,255,.08)}
+.btn-secondary:hover{border-color:rgba(0,245,196,.3);background:rgba(0,245,196,.04)}
+
+/* scroll hint */
 .scroll-hint{
-  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:8px;
-  animation:fade-in 1.2s ease both .8s;
+  animation:fade-in 1s ease both .7s;
 }
-.scroll-hint span{font-size:.62rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-.scroll-line{
-  width:1px;height:48px;
-  background:linear-gradient(to bottom,var(--teal),transparent);
-  animation:scroll-line 1.8s ease-in-out infinite;
-}
-@keyframes scroll-line{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.7)}}
+.scroll-hint span{font-size:.58rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--teal),transparent);animation:sline 2s ease-in-out infinite}
+@keyframes sline{0%,100%{opacity:.2}50%{opacity:.8}}
 
-/* ────────────────────────────────────────────
-   FLOATING PHONE  — redesigned
-   ──────────────────────────────────────────── */
-#floating-phone{
+/* ─── FLOATING PHONE ─── */
+#fp-wrap{
+  display:none; /* hidden until JS shows it, desktop only */
   position:fixed;
-  right:20px;
+  right:24px;
   top:50%;
-  transform:translateY(-50%);
-  z-index:50;
-  opacity:0;
-  transition:opacity .6s ease, transform .6s ease;
-  pointer-events:none;
-  animation:phone-bob 5s ease-in-out infinite;
+  z-index:100;
+  /* bob is achieved via animation on a child so transform:translateY(-50%) stays clean */
 }
-#floating-phone.visible{
-  opacity:1;
-  pointer-events:auto;
+#fp-wrap.fp-show{display:block}
+
+.fp-bob{
+  animation:fp-bob 5s ease-in-out infinite;
+}
+@keyframes fp-bob{
+  0%,100%{transform:translateY(calc(-50% + 0px))}
+  50%{transform:translateY(calc(-50% - 9px))}
 }
 
-/* The bob is applied on top of the fixed translateY(-50%) via CSS custom property trick */
-@keyframes phone-bob{
-  0%,100%{ margin-top:0px }
-  50%{ margin-top:-8px }
-}
-
-/* ── Chassis ── */
+/* chassis */
 .fp-chassis{
-  width:115px;
+  width:120px;
   position:relative;
-  border-radius:26px;
-  background:linear-gradient(165deg,#242428 0%,#1a1a1e 55%,#111114 100%);
-  padding:2.5px;
+  border-radius:28px;
+  background:linear-gradient(160deg,#28282d 0%,#1b1b1f 45%,#101013 100%);
+  padding:3px;
   box-shadow:
-    /* rim highlight */
-    0 0 0 0.5px rgba(255,255,255,.09),
-    /* left edge shadow (depth) */
-    -4px 0 12px rgba(0,0,0,.6),
-    /* bottom glow from screen */
-    0 6px 32px rgba(0,255,209,.08),
-    /* ambient drop shadow */
-    0 20px 48px rgba(0,0,0,.7),
-    /* inner top shine */
-    inset 0 1px 0 rgba(255,255,255,.07);
+    0 0 0 0.5px rgba(255,255,255,.08),
+    -5px 0 14px rgba(0,0,0,.5),
+    0 24px 56px rgba(0,0,0,.65),
+    0 4px 20px rgba(0,255,200,.06),
+    inset 0 1px 0 rgba(255,255,255,.06);
 }
-
-/* Left volume buttons */
+/* volume left */
 .fp-chassis::before{
-  content:'';
-  position:absolute;
-  left:-2.5px;top:56px;
-  width:2.5px;height:16px;
-  background:linear-gradient(180deg,#2e2e32,#1c1c1f);
-  border-radius:2px 0 0 2px;
-  box-shadow:0 22px 0 #252528, 0 40px 0 #252528;
+  content:'';position:absolute;
+  left:-2.5px;top:62px;
+  width:2.5px;height:14px;
+  background:#2a2a2e;border-radius:2px 0 0 2px;
+  box-shadow:0 20px 0 #2a2a2e,0 36px 0 #2a2a2e;
 }
-/* Right power button */
+/* power right */
 .fp-chassis::after{
-  content:'';
-  position:absolute;
-  right:-2.5px;top:72px;
-  width:2.5px;height:22px;
-  background:linear-gradient(180deg,#2e2e32,#1c1c1f);
-  border-radius:0 2px 2px 0;
+  content:'';position:absolute;
+  right:-2.5px;top:80px;
+  width:2.5px;height:20px;
+  background:#242428;border-radius:0 2px 2px 0;
 }
 
-/* ── Screen bezel ── */
-.fp-screen-wrap{
+.fp-inner{
   background:#000;
-  border-radius:24px;
+  border-radius:25px;
   overflow:hidden;
   position:relative;
 }
-
-/* Dynamic island pill */
+/* dynamic island */
 .fp-island{
-  position:absolute;top:8px;left:50%;transform:translateX(-50%);
-  width:40px;height:11px;
-  background:#000;
-  border-radius:99px;
-  z-index:10;
-  box-shadow:0 0 0 1px rgba(255,255,255,.05);
+  position:absolute;top:9px;left:50%;transform:translateX(-50%);
+  width:38px;height:10px;
+  background:#000;border-radius:99px;z-index:10;
+  box-shadow:0 0 0 1px rgba(255,255,255,.04);
 }
-
-/* ── Screen content area ── */
 .fp-screen{
-  background:linear-gradient(170deg,#0b0b14 0%,#060610 100%);
-  padding:28px 9px 10px;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  min-height:260px;
+  background:linear-gradient(168deg,#0c0c17 0%,#06060e 100%);
+  padding:27px 10px 12px;
+  display:flex;flex-direction:column;gap:5px;
 }
 
-/* Status bar */
-.fp-status{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:2px;
-}
-.fp-time{
-  font-family:'Space Mono',monospace;
-  font-size:7px;
-  color:rgba(255,255,255,.35);
-  letter-spacing:.03em;
-}
-.fp-icons{
-  display:flex;gap:3px;align-items:center;
-}
-.fp-signal{display:flex;gap:1px;align-items:flex-end}
-.fp-bar{width:2px;background:rgba(255,255,255,.3);border-radius:1px}
+/* status */
+.fp-status{display:flex;justify-content:space-between;align-items:center;margin-bottom:1px}
+.fp-time{font-family:'Space Mono',monospace;font-size:6.5px;color:rgba(255,255,255,.3);letter-spacing:.04em}
+.fp-bars{display:flex;align-items:flex-end;gap:1.5px}
+.fp-bar{width:2px;background:rgba(255,255,255,.25);border-radius:1px}
 
-/* App header */
-.fp-app-header{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  margin-bottom:2px;
-}
-.fp-app-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:#00FFD1;
-  box-shadow:0 0 4px rgba(0,255,209,.7);
-}
-.fp-app-name{
-  font-family:'Syne',sans-serif;
-  font-size:8.5px;
-  font-weight:800;
-  letter-spacing:.08em;
-  color:rgba(255,255,255,.7);
-  text-transform:uppercase;
-}
+/* app id */
+.fp-approw{display:flex;align-items:center;gap:4px;margin-bottom:1px}
+.fp-appdot{width:5px;height:5px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px rgba(0,245,196,.6);flex-shrink:0}
+.fp-appname{font-family:'Syne',sans-serif;font-size:7.5px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.55);text-transform:uppercase}
 
-/* Patrimônio value */
-.fp-pat-card{
-  background:rgba(0,255,209,.04);
-  border:1px solid rgba(0,255,209,.1);
-  border-radius:10px;
-  padding:8px 10px 7px;
+/* patrimônio */
+.fp-patcard{
+  background:rgba(0,245,196,.04);
+  border:1px solid rgba(0,245,196,.1);
+  border-radius:9px;padding:7px 9px 6px;
 }
-.fp-pat-label{
-  font-family:'Space Mono',monospace;
-  font-size:6px;
-  color:rgba(0,255,209,.45);
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  margin-bottom:2px;
-}
-.fp-pat-value{
-  font-family:'Syne',sans-serif;
-  font-size:18px;
-  font-weight:800;
-  color:#fff;
-  line-height:1;
-  letter-spacing:-.02em;
-}
-.fp-pat-change{
-  display:flex;
-  align-items:center;
-  gap:3px;
-  margin-top:3px;
-}
-.fp-change-badge{
-  background:rgba(0,255,209,.1);
-  border-radius:4px;
-  padding:1px 5px;
-  font-family:'Space Mono',monospace;
-  font-size:6px;
-  color:var(--teal);
-  font-weight:700;
-}
-.fp-change-period{
-  font-family:'Space Mono',monospace;
-  font-size:6px;
-  color:rgba(255,255,255,.22);
-}
+.fp-patlabel{font-family:'Space Mono',monospace;font-size:5.5px;color:rgba(0,245,196,.4);text-transform:uppercase;letter-spacing:.12em;margin-bottom:1px}
+.fp-patval{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+.fp-patchange{display:flex;align-items:center;gap:3px;margin-top:3px}
+.fp-badge{background:rgba(0,245,196,.1);border-radius:3px;padding:1px 5px;font-family:'Space Mono',monospace;font-size:5.5px;color:var(--teal);font-weight:700}
+.fp-period{font-family:'Space Mono',monospace;font-size:5.5px;color:rgba(255,255,255,.2)}
 
-/* Allocation horizontal bar */
-.fp-alloc-section{}
-.fp-alloc-label{
-  font-family:'Space Mono',monospace;
-  font-size:5.5px;
-  color:rgba(255,255,255,.2);
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  margin-bottom:4px;
-}
-.fp-alloc-bar{
-  display:flex;
-  height:4px;
-  border-radius:99px;
-  overflow:hidden;
-  gap:1.5px;
-  margin-bottom:5px;
-}
-.fp-alloc-bar span{
-  height:100%;
-  border-radius:99px;
-}
+/* alloc bar */
+.fp-alloclabel{font-family:'Space Mono',monospace;font-size:5px;color:rgba(255,255,255,.18);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
+.fp-allocbar{display:flex;height:3.5px;border-radius:99px;overflow:hidden;gap:1px}
+.fp-allocbar span{height:100%;border-radius:99px}
 
-/* Asset rows */
-.fp-asset-row{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  padding:4.5px 6px;
-  border-radius:7px;
-  background:rgba(255,255,255,.03);
+/* asset row */
+.fp-row{
+  display:flex;align-items:center;gap:5px;
+  padding:4px 6px;border-radius:6px;
+  background:rgba(255,255,255,.025);
 }
-.fp-asset-dot{
-  width:4px;height:4px;
-  border-radius:50%;
-  flex-shrink:0;
+.fp-rowdot{width:4px;height:4px;border-radius:50%;flex-shrink:0}
+.fp-rowinfo{flex:1;min-width:0}
+.fp-rowticker{font-family:'Space Mono',monospace;font-size:6.5px;font-weight:700;color:rgba(255,255,255,.7);line-height:1}
+.fp-rowtype{font-family:'Space Mono',monospace;font-size:5px;color:rgba(255,255,255,.2);margin-top:1px}
+.fp-rowpct{font-family:'Space Mono',monospace;font-size:6.5px;font-weight:700;color:rgba(255,255,255,.4);flex-shrink:0}
+
+/* locked row */
+.fp-locked{
+  display:flex;align-items:center;gap:5px;
+  padding:3.5px 6px;border-radius:6px;
+  background:rgba(255,255,255,.012);
+  border:1px solid rgba(255,255,255,.035);
 }
-.fp-asset-info{flex:1;min-width:0}
-.fp-asset-ticker{
-  font-family:'Space Mono',monospace;
-  font-size:7px;
-  font-weight:700;
-  color:rgba(255,255,255,.75);
-  line-height:1;
-}
-.fp-asset-type{
-  font-family:'Space Mono',monospace;
-  font-size:5.5px;
-  color:rgba(255,255,255,.22);
+.fp-lockico{font-size:6px;opacity:.25;flex-shrink:0}
+.fp-lockblur{font-family:'Space Mono',monospace;font-size:6px;color:rgba(255,255,255,.12);filter:blur(3px);flex:1;user-select:none}
+.fp-lockpct{font-family:'Space Mono',monospace;font-size:6px;color:rgba(255,255,255,.18);flex-shrink:0}
+
+/* bottom hint */
+.fp-hint{
   margin-top:1px;
-}
-.fp-asset-pct{
-  font-family:'Space Mono',monospace;
-  font-size:7px;
-  font-weight:700;
-  color:rgba(255,255,255,.5);
-  flex-shrink:0;
-}
-
-/* Locked rows */
-.fp-locked-row{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  padding:4px 6px;
-  border-radius:7px;
-  background:rgba(255,255,255,.015);
-  border:1px solid rgba(255,255,255,.04);
-}
-.fp-lock-ico{font-size:7px;opacity:.3;flex-shrink:0}
-.fp-lock-blur{
-  font-family:'Space Mono',monospace;
-  font-size:6.5px;
-  color:rgba(255,255,255,.15);
-  filter:blur(3.5px);
-  flex:1;
-  user-select:none;
-}
-.fp-lock-pct{
-  font-family:'Space Mono',monospace;
-  font-size:6.5px;
-  color:rgba(255,255,255,.2);
-  flex-shrink:0;
-}
-
-/* Bottom unlock hint */
-.fp-unlock-hint{
-  margin-top:2px;
+  padding:4px 6px;border-radius:6px;
+  border:1px solid rgba(123,47,255,.18);
+  background:rgba(123,47,255,.05);
   text-align:center;
-  padding:5px 4px;
-  border-radius:7px;
-  border:1px solid rgba(123,47,255,.2);
-  background:rgba(123,47,255,.06);
 }
-.fp-unlock-text{
-  font-family:'Space Mono',monospace;
-  font-size:5.5px;
-  color:rgba(123,47,255,.7);
-  letter-spacing:.05em;
-  text-transform:uppercase;
-}
+.fp-hint span{font-family:'Space Mono',monospace;font-size:5px;color:rgba(123,47,255,.6);letter-spacing:.05em;text-transform:uppercase}
 
-/* FEATURES STRIP */
-#features{
+/* TICKER */
+.ticker-wrap{
+  overflow:hidden;
+  border-top:1px solid rgba(123,47,255,.12);
+  border-bottom:1px solid rgba(123,47,255,.12);
+  padding:11px 0;
   position:relative;z-index:1;
-  padding:100px 24px;
 }
-.section-label{
-  font-family:'Space Mono',monospace;
-  font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--teal);margin-bottom:16px;
-}
-.section-title{
-  font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;
-  margin-bottom:48px;
-}
-.features-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;max-width:960px;margin:0 auto;
-}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 22s linear infinite}
+.ticker-item{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);padding:0 28px;display:flex;align-items:center;gap:8px;letter-spacing:.06em}
+.ticker-item .up{color:var(--teal)}
+.ticker-item .dn{color:#ff5555}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* FEATURES */
+#features{position:relative;z-index:1;padding:110px 32px;max-width:1000px;margin:0 auto}
+.section-tag{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.7rem,3.5vw,2.8rem);line-height:1.05;margin-bottom:52px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;border:1px solid var(--border);border-radius:20px;overflow:hidden}
 .feat-card{
-  background:var(--glass);
-  border:1px solid var(--border);border-radius:20px;
-  padding:28px 24px;
-  backdrop-filter:blur(12px);
+  background:rgba(10,6,28,.6);
+  padding:28px 26px;
+  border:none;
   position:relative;overflow:hidden;
-  transition:border-color .3s,transform .3s;
-  opacity:0;transform:translateY(30px);
+  transition:background .3s;
+  opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease,background .3s;
 }
-.feat-card.show{opacity:1;transform:translateY(0);transition:opacity .5s ease,transform .5s ease,border-color .3s,transform .3s}
-.feat-card:hover{border-color:rgba(0,255,209,.3);transform:translateY(-4px)}
-.feat-card::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at top left,rgba(123,47,255,.06),transparent 60%);
-  pointer-events:none;
-}
-.feat-icon{
-  width:44px;height:44px;border-radius:12px;
-  background:rgba(123,47,255,.12);border:1px solid rgba(123,47,255,.2);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:18px;font-size:1.2rem;
-}
-.feat-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px}
-.feat-card p{font-size:.82rem;color:rgba(240,238,248,.5);line-height:1.65}
+.feat-card.show{opacity:1;transform:translateY(0)}
+.feat-card:hover{background:rgba(20,12,48,.8)}
+.feat-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(123,47,255,.05),transparent 55%);pointer-events:none}
+.feat-num{font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(123,47,255,.4);margin-bottom:16px;letter-spacing:.1em}
+.feat-card h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:8px;color:var(--white)}
+.feat-card p{font-size:.8rem;color:rgba(238,234,248,.4);line-height:1.7}
 
 /* SIMULADOR */
-#simulador{
-  position:relative;z-index:1;
-  padding:100px 24px;max-width:700px;margin:0 auto;
-}
+#simulador{position:relative;z-index:1;padding:110px 32px;max-width:680px;margin:0 auto}
 .sim-card{
   background:var(--glass);border:1px solid var(--border);
-  border-radius:28px;padding:40px 36px;backdrop-filter:blur(16px);
-  box-shadow:0 0 80px rgba(123,47,255,.1);
+  border-radius:24px;padding:40px 36px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
-.sim-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;flex-wrap:wrap;gap:12px}
-.sim-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800}
-.sim-display{
-  font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;
-  color:var(--teal);text-align:right;
-}
-.sim-display small{display:block;font-size:.55rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;text-align:right}
-.input-wrap{position:relative;margin-bottom:24px}
-.input-prefix{
-  position:absolute;left:18px;top:50%;transform:translateY(-50%);
-  font-family:'Space Mono',monospace;font-size:1rem;color:var(--muted);pointer-events:none;
-}
+.sim-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;gap:12px;flex-wrap:wrap}
+.sim-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800}
+.sim-disp{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:var(--teal);text-align:right}
+.sim-disp small{display:block;font-size:.52rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.input-wrap{position:relative;margin-bottom:20px}
+.input-prefix{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:.95rem;color:var(--muted);pointer-events:none}
 #val-input{
-  width:100%;background:rgba(3,1,10,.7);
-  border:2px solid rgba(123,47,255,.3);border-radius:14px;
-  padding:18px 18px 18px 54px;
-  color:var(--teal);font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;
-  outline:none;transition:border-color .25s,box-shadow .25s;
+  width:100%;background:rgba(4,1,8,.8);
+  border:1.5px solid rgba(123,47,255,.25);border-radius:12px;
+  padding:16px 16px 16px 48px;
+  color:var(--teal);font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;
+  outline:none;transition:border-color .2s,box-shadow .2s;
 }
-#val-input:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(0,255,209,.1)}
-#val-input::placeholder{color:rgba(74,69,101,.5)}
-.warning-box{
-  display:flex;gap:12px;background:rgba(255,180,0,.04);
-  border:1px solid rgba(255,180,0,.18);border-radius:12px;padding:14px;margin-bottom:24px;
-}
-.warning-box span{font-size:.72rem;color:rgba(255,220,100,.7);line-height:1.55}
-#inv-list{}
-.zero-state{
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-  padding:40px 0;color:var(--muted);text-align:center;
-}
-.zero-state svg{opacity:.3}
-.zero-state p{font-size:.82rem}
-.prog-bar{
-  display:flex;height:5px;border-radius:99px;overflow:hidden;gap:2px;margin-bottom:24px;
-}
-.prog-seg{height:100%;border-radius:99px;transition:width .4s ease}
-.sec-label{
-  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:10px;
-}
-.inv-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.inv-row{
-  display:flex;align-items:center;gap:14px;
-  background:rgba(3,1,10,.5);border:1px solid rgba(123,47,255,.15);
-  border-radius:14px;padding:14px 16px;
-  transition:border-color .2s;
-}
-.inv-row.live{border-color:rgba(0,255,209,.2)}
-.inv-row.live:hover{border-color:rgba(0,255,209,.4)}
-.inv-ico{
-  width:40px;height:40px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;
-}
-.ico-teal{background:rgba(0,255,209,.1)}
-.ico-violet{background:rgba(123,47,255,.12)}
-.ico-lock{background:rgba(51,65,85,.3)}
-.inv-ticker{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;}
+#val-input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,245,196,.08)}
+#val-input::placeholder{color:rgba(82,73,110,.4)}
+.warn-box{display:flex;gap:10px;background:rgba(255,176,0,.03);border:1px solid rgba(255,176,0,.14);border-radius:10px;padding:12px;margin-bottom:20px}
+.warn-box span{font-size:.7rem;color:rgba(255,215,90,.6);line-height:1.6}
+.zero-state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:40px 0;color:var(--muted);text-align:center}
+.zero-state p{font-size:.8rem}
+.prog-bar{display:flex;height:4px;border-radius:99px;overflow:hidden;gap:2px;margin-bottom:22px}
+.prog-seg{height:100%;border-radius:99px}
+.sec-lbl{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:9px}
+.inv-rows{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.inv-row{display:flex;align-items:center;gap:12px;background:rgba(4,1,8,.5);border:1px solid rgba(123,47,255,.12);border-radius:12px;padding:13px 15px;transition:border-color .2s}
+.inv-row.live{border-color:rgba(0,245,196,.15)}
+.inv-row.live:hover{border-color:rgba(0,245,196,.35)}
+.inv-ico{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem}
+.ico-teal{background:rgba(0,245,196,.08)}
+.ico-violet{background:rgba(123,47,255,.1)}
+.ico-lock{background:rgba(51,65,85,.25)}
+.inv-ticker{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700}
 .ticker-teal{color:var(--teal)}
 .ticker-violet{color:#c4b5fd}
 .ticker-lock{color:#475569}
-.inv-sub{font-size:.68rem;color:var(--muted);margin-top:3px}
-.pct-pill{
-  font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;
-  padding:3px 10px;border-radius:99px;flex-shrink:0;
-}
-.pill-teal{background:rgba(0,255,209,.1);color:var(--teal)}
-.pill-violet{background:rgba(123,47,255,.15);color:#c4b5fd}
-.pill-lock{background:rgba(51,65,85,.3);color:#475569}
-.inv-val{
-  font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;
-  color:var(--white);text-align:right;white-space:nowrap;
-}
-.blur-v{filter:blur(7px);user-select:none;pointer-events:none;color:var(--muted)}
-.lock-chip{
-  display:inline-flex;align-items:center;gap:4px;margin-top:4px;
-  background:rgba(51,65,85,.4);border-radius:99px;padding:2px 8px;
-  font-size:.55rem;color:#475569;letter-spacing:.06em;text-transform:uppercase;
-}
-.divider{
-  height:1px;background:linear-gradient(90deg,transparent,rgba(123,47,255,.35),transparent);
-  margin:14px 0 18px;
-}
-.total-row{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 0;border-top:1px solid rgba(123,47,255,.2);
-}
-.total-row span:first-child{font-size:.72rem;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.total-row span:last-child{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--teal)}
-.unlock-box{
-  margin-top:24px;background:rgba(3,1,10,.7);
-  border:1px solid rgba(123,47,255,.3);border-radius:18px;
-  padding:24px;text-align:center;
-}
-.unlock-box p.u-tag{font-size:.6rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
-.unlock-box p.u-desc{font-size:.82rem;color:rgba(240,238,248,.55);line-height:1.6;margin-bottom:16px}
-.btn-unlock{
-  display:inline-flex;align-items:center;gap:8px;
-  background:linear-gradient(135deg,var(--violet),var(--violet2));
-  color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
-  padding:13px 28px;border-radius:12px;text-decoration:none;
-  transition:transform .2s,box-shadow .2s;
-  animation:pulse-v 2.4s ease-out infinite;
-}
-.btn-unlock:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(123,47,255,.5)}
-@keyframes pulse-v{
-  0%{box-shadow:0 0 0 0 rgba(123,47,255,.5)}
-  70%{box-shadow:0 0 0 10px rgba(123,47,255,0)}
-  100%{box-shadow:0 0 0 0 rgba(123,47,255,0)}
-}
+.inv-sub{font-size:.65rem;color:var(--muted);margin-top:2px}
+.pct-pill{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:99px;flex-shrink:0}
+.pill-teal{background:rgba(0,245,196,.08);color:var(--teal)}
+.pill-violet{background:rgba(123,47,255,.12);color:#c4b5fd}
+.pill-lock{background:rgba(51,65,85,.25);color:#475569}
+.inv-val{font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;color:var(--white);text-align:right;white-space:nowrap}
+.blur-v{filter:blur(6px);user-select:none;pointer-events:none;color:var(--muted)}
+.lock-chip{display:inline-flex;align-items:center;gap:3px;margin-top:3px;background:rgba(51,65,85,.35);border-radius:99px;padding:2px 7px;font-size:.52rem;color:#475569;letter-spacing:.05em;text-transform:uppercase}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(123,47,255,.3),transparent);margin:12px 0 16px}
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid rgba(123,47,255,.15)}
+.total-row span:first-child{font-size:.68rem;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.total-row span:last-child{font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:var(--teal)}
+.unlock-box{margin-top:20px;background:rgba(4,1,8,.7);border:1px solid rgba(123,47,255,.25);border-radius:16px;padding:22px;text-align:center}
+.unlock-box .u-tag{font-size:.58rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
+.unlock-box .u-desc{font-size:.78rem;color:rgba(238,234,248,.45);line-height:1.65;margin-bottom:14px}
+.btn-unlock{display:inline-flex;align-items:center;gap:7px;background:var(--violet);color:#fff;font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:12px 26px;border-radius:10px;text-decoration:none;transition:background .2s,box-shadow .2s,transform .2s;animation:pulse-v 2.5s ease-out infinite}
+.btn-unlock:hover{background:var(--violet2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(123,47,255,.45)}
+@keyframes pulse-v{0%{box-shadow:0 0 0 0 rgba(123,47,255,.45)}70%{box-shadow:0 0 0 9px rgba(123,47,255,0)}100%{box-shadow:0 0 0 0 rgba(123,47,255,0)}}
 
-/* PAYMENT SECTION */
-#checkout{
-  position:relative;z-index:1;
-  padding:100px 24px;max-width:700px;margin:0 auto;
-}
+/* CHECKOUT */
+#checkout{position:relative;z-index:1;padding:110px 32px;max-width:680px;margin:0 auto}
 .checkout-card{
-  background:linear-gradient(145deg,rgba(7,4,21,.95),rgba(13,8,37,.95));
-  border:1px solid rgba(0,255,209,.25);border-radius:32px;
-  padding:56px 48px;position:relative;overflow:hidden;
-  backdrop-filter:blur(16px);
-  box-shadow:0 0 100px rgba(0,255,209,.08);
+  background:linear-gradient(150deg,rgba(10,6,28,.98),rgba(15,8,40,.98));
+  border:1px solid rgba(0,245,196,.2);border-radius:28px;
+  padding:52px 48px;position:relative;overflow:hidden;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
-.checkout-card::before{
-  content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  width:200px;height:2px;
-  background:linear-gradient(90deg,transparent,var(--teal),transparent);
-}
-.checkout-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(0,255,209,.08);border:1px solid rgba(0,255,209,.2);
-  border-radius:99px;padding:6px 16px;font-size:.65rem;font-weight:700;
-  letter-spacing:.15em;color:var(--teal);text-transform:uppercase;
-  margin-bottom:24px;
-}
-.checkout-title{
-  font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(1.9rem,4vw,3rem);line-height:1.1;margin-bottom:16px;
-}
-.checkout-sub{font-size:.9rem;color:rgba(240,238,248,.5);line-height:1.7;margin-bottom:36px;max-width:480px}
-.checklist{display:flex;flex-direction:column;gap:14px;margin-bottom:40px}
-.check-item{display:flex;align-items:flex-start;gap:14px}
-.check-ico{
-  width:22px;height:22px;border-radius:99px;flex-shrink:0;margin-top:2px;
-  background:rgba(0,255,209,.12);border:1px solid rgba(0,255,209,.25);
-  display:flex;align-items:center;justify-content:center;
-}
-.check-ico::after{content:'✓';font-size:.65rem;color:var(--teal);font-weight:700}
-.check-item p{font-size:.88rem;color:rgba(240,238,248,.7);line-height:1.5}
+.checkout-card::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:180px;height:1.5px;background:linear-gradient(90deg,transparent,var(--teal),transparent)}
+.checkout-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,245,196,.07);border:1px solid rgba(0,245,196,.18);border-radius:99px;padding:5px 14px;font-size:.62rem;font-weight:700;letter-spacing:.14em;color:var(--teal);text-transform:uppercase;margin-bottom:22px}
+.checkout-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.7rem,3.5vw,2.6rem);line-height:1.08;margin-bottom:14px}
+.checkout-sub{font-size:.85rem;color:rgba(238,234,248,.45);line-height:1.75;margin-bottom:34px;max-width:460px}
+.checklist{display:flex;flex-direction:column;gap:13px;margin-bottom:36px}
+.check-item{display:flex;align-items:flex-start;gap:12px}
+.check-ico{width:20px;height:20px;border-radius:99px;flex-shrink:0;margin-top:2px;background:rgba(0,245,196,.1);border:1px solid rgba(0,245,196,.22);display:flex;align-items:center;justify-content:center}
+.check-ico::after{content:'✓';font-size:.6rem;color:var(--teal);font-weight:700}
+.check-item p{font-size:.83rem;color:rgba(238,234,248,.6);line-height:1.55}
 .check-item strong{color:var(--white)}
-.price-block{
-  background:rgba(3,1,10,.7);border:1px solid rgba(123,47,255,.3);
-  border-radius:20px;padding:28px;margin-bottom:28px;text-align:center;
-}
-.price-from{font-size:.78rem;color:var(--muted);margin-bottom:4px}
+.price-block{background:rgba(4,1,8,.75);border:1px solid rgba(123,47,255,.22);border-radius:18px;padding:26px;margin-bottom:24px;text-align:center}
+.price-from{font-size:.72rem;color:var(--muted);margin-bottom:4px}
 .price-from span{text-decoration:line-through}
-.price-main{
-  font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(3rem,8vw,5rem);line-height:1;
-  background:linear-gradient(135deg,var(--white),var(--teal));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin:6px 0;
-}
-.price-note{font-size:.72rem;color:rgba(0,255,209,.6);letter-spacing:.08em}
-.btn-checkout{
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  background:linear-gradient(135deg,var(--teal),var(--teal2));
-  color:#03010A;font-weight:700;font-size:1rem;letter-spacing:.05em;
-  padding:20px 32px;border-radius:16px;text-decoration:none;
-  text-transform:uppercase;width:100%;
-  transition:transform .2s,box-shadow .2s;
-  box-shadow:0 0 40px rgba(0,255,209,.2);
-}
-.btn-checkout:hover{transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,255,209,.35)}
-.btn-checkout svg{width:20px;height:20px}
-.trust-row{
-  display:flex;justify-content:center;gap:28px;flex-wrap:wrap;
-  margin-top:24px;padding-top:24px;border-top:1px solid rgba(123,47,255,.15);
-}
-.trust-item{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--muted)}
+.price-main{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,7vw,4.5rem);line-height:1;background:linear-gradient(135deg,var(--white),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:5px 0}
+.price-note{font-size:.68rem;color:rgba(0,245,196,.55);letter-spacing:.08em}
+.btn-checkout{display:flex;align-items:center;justify-content:center;gap:11px;background:var(--teal);color:#040108;font-weight:700;font-size:.95rem;letter-spacing:.04em;padding:18px 32px;border-radius:14px;text-decoration:none;text-transform:uppercase;width:100%;transition:box-shadow .2s,transform .2s}
+.btn-checkout:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(0,245,196,.3)}
+.btn-checkout svg{width:18px;height:18px;flex-shrink:0}
+.trust-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:20px;padding-top:20px;border-top:1px solid rgba(123,47,255,.12)}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:.67rem;color:var(--muted)}
 
 /* TESTIMONIALS */
-#testimonials{
-  position:relative;z-index:1;
-  padding:80px 24px;max-width:900px;margin:0 auto;
-}
-.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}
-.testi-card{
-  background:var(--glass);border:1px solid var(--border);
-  border-radius:18px;padding:24px;backdrop-filter:blur(10px);
-  opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;
-}
+#testimonials{position:relative;z-index:1;padding:80px 32px;max-width:960px;margin:0 auto}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:40px}
+.testi-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:22px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
 .testi-card.show{opacity:1;transform:translateY(0)}
-.testi-stars{display:flex;gap:3px;margin-bottom:12px}
-.star{color:#FBB040;font-size:.85rem}
-.testi-text{font-size:.82rem;color:rgba(240,238,248,.6);line-height:1.65;margin-bottom:14px;font-style:italic}
-.testi-author{font-size:.75rem;font-weight:700;color:var(--white)}
+.testi-stars{display:flex;gap:2px;margin-bottom:10px}
+.star{color:#F4A82A;font-size:.8rem}
+.testi-text{font-size:.78rem;color:rgba(238,234,248,.5);line-height:1.7;margin-bottom:12px;font-style:italic}
+.testi-author{font-size:.72rem;font-weight:700;color:var(--white)}
 
 /* FOOTER */
-footer{
-  position:relative;z-index:1;
-  border-top:1px solid var(--border);
-  padding:40px 24px;text-align:center;
-}
-footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;margin:0 auto}
-.foot-logo{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.15em;
-  background:linear-gradient(90deg,var(--teal),var(--violet));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:16px;display:block;
-}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 32px;text-align:center}
+footer p{font-size:.65rem;color:rgba(82,73,110,.7);line-height:1.75;max-width:580px;margin:0 auto}
+.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.16em;background:linear-gradient(90deg,var(--teal),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;display:block}
 
 @keyframes fade-in{from{opacity:0}to{opacity:1}}
-@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-/* TICKER TAPE */
-.ticker-wrap{
-  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:12px 0;margin:60px 0;position:relative;z-index:1;
+/* ─── MOBILE ─── */
+@media(max-width:1024px){
+  #fp-wrap{display:none !important}
 }
-.ticker-inner{
-  display:flex;gap:0;animation:ticker 18s linear infinite;
-  white-space:nowrap;
-}
-.ticker-item{
-  font-family:'Space Mono',monospace;font-size:.7rem;
-  color:var(--muted);padding:0 32px;letter-spacing:.08em;
-  display:flex;align-items:center;gap:10px;
-}
-.ticker-item .up{color:var(--teal)}
-.ticker-item .dn{color:#FF5555}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-@media(max-width:900px){
-  #floating-phone{display:none}
-}
-@media(max-width:768px){
-  .checkout-card{padding:36px 24px}
-  .sim-card{padding:28px 20px}
+@media(max-width:640px){
   #header{padding:14px 20px}
+  #hero{padding:90px 20px 70px}
+  .hero-title{font-size:clamp(2.2rem,11vw,3.2rem)}
+  #features,#simulador,#checkout,#testimonials{padding:70px 20px}
+  .checkout-card{padding:32px 22px}
+  .sim-card{padding:28px 20px}
+  .features-grid{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;align-items:center}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center}
 }
 </style>
 </head>
@@ -744,7 +439,7 @@ footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;mar
   <span class="logo">MATIAS INVEST</span>
   <a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="header-cta">
     <span class="pulse-dot"></span>
-    <span>Liberar Acesso</span>
+    Liberar Acesso
   </a>
 </header>
 
@@ -759,11 +454,11 @@ footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;mar
     <span class="line2">PATRIMÔNIO</span>
   </h1>
   <p class="hero-sub">
-    Conheça a metodologia real de distribuição e rebalanceamento de capital que gerou mais de <strong style="color:var(--teal)">R$ 30.000</strong> em patrimônio organizado com apenas 18 anos.
+    A metodologia real de distribuição e rebalanceamento de capital que gerou mais de <strong>R$&nbsp;30.000</strong> em patrimônio organizado com apenas 18 anos.
   </p>
   <div class="hero-actions">
     <a href="#simulador" class="btn-primary">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       Simular Agora
     </a>
     <a href="#checkout" class="btn-secondary">
@@ -776,155 +471,147 @@ footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;mar
   </div>
 </section>
 
-<!-- TICKER TAPE -->
+<!-- TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker-inner" id="ticker">
-    <span class="ticker-item">WIZC3 <span class="up">▲ R$ 10,35</span></span>
-    <span class="ticker-item">BRBI11 <span class="up">▲ R$ 42,80</span></span>
+  <div class="ticker-inner">
+    <span class="ticker-item">WIZC3 <span class="up">▲ R$&nbsp;10,35</span></span>
+    <span class="ticker-item">BRBI11 <span class="up">▲ R$&nbsp;42,80</span></span>
     <span class="ticker-item">CDI <span class="up">10,65% a.a.</span></span>
     <span class="ticker-item">IBOVESPA <span class="dn">▼ 127.420</span></span>
-    <span class="ticker-item">BTC <span class="up">▲ R$ 548.200</span></span>
-    <span class="ticker-item">FII · XPLG11 <span class="up">▲ R$ 97,40</span></span>
+    <span class="ticker-item">BTC <span class="up">▲ R$&nbsp;548.200</span></span>
+    <span class="ticker-item">FII · XPLG11 <span class="up">▲ R$&nbsp;97,40</span></span>
     <span class="ticker-item">SELIC <span class="up">10,50% a.a.</span></span>
-    <span class="ticker-item">S&P500 <span class="up">▲ 5.421</span></span>
-    <span class="ticker-item">WIZC3 <span class="up">▲ R$ 10,35</span></span>
-    <span class="ticker-item">BRBI11 <span class="up">▲ R$ 42,80</span></span>
+    <span class="ticker-item">S&P 500 <span class="up">▲ 5.421</span></span>
+    <span class="ticker-item">WIZC3 <span class="up">▲ R$&nbsp;10,35</span></span>
+    <span class="ticker-item">BRBI11 <span class="up">▲ R$&nbsp;42,80</span></span>
     <span class="ticker-item">CDI <span class="up">10,65% a.a.</span></span>
     <span class="ticker-item">IBOVESPA <span class="dn">▼ 127.420</span></span>
-    <span class="ticker-item">BTC <span class="up">▲ R$ 548.200</span></span>
-    <span class="ticker-item">FII · XPLG11 <span class="up">▲ R$ 97,40</span></span>
+    <span class="ticker-item">BTC <span class="up">▲ R$&nbsp;548.200</span></span>
+    <span class="ticker-item">FII · XPLG11 <span class="up">▲ R$&nbsp;97,40</span></span>
     <span class="ticker-item">SELIC <span class="up">10,50% a.a.</span></span>
-    <span class="ticker-item">S&P500 <span class="up">▲ 5.421</span></span>
+    <span class="ticker-item">S&P 500 <span class="up">▲ 5.421</span></span>
   </div>
 </div>
 
-<!-- ─── FLOATING PHONE ─── -->
-<div id="floating-phone">
-  <div class="fp-chassis">
-    <div class="fp-screen-wrap">
-      <div class="fp-island"></div>
-      <div class="fp-screen">
+<!-- FLOATING PHONE -->
+<div id="fp-wrap">
+  <div class="fp-bob">
+    <div class="fp-chassis">
+      <div class="fp-inner">
+        <div class="fp-island"></div>
+        <div class="fp-screen">
 
-        <!-- Status bar -->
-        <div class="fp-status">
-          <div class="fp-time">16:42</div>
-          <div class="fp-icons">
-            <div class="fp-signal">
+          <div class="fp-status">
+            <div class="fp-time">16:42</div>
+            <div class="fp-bars">
               <div class="fp-bar" style="height:3px"></div>
               <div class="fp-bar" style="height:5px"></div>
               <div class="fp-bar" style="height:7px"></div>
-              <div class="fp-bar" style="height:9px;background:rgba(255,255,255,.6)"></div>
+              <div class="fp-bar" style="height:9px;background:rgba(255,255,255,.55)"></div>
             </div>
           </div>
-        </div>
 
-        <!-- App name -->
-        <div class="fp-app-header">
-          <div class="fp-app-dot"></div>
-          <span class="fp-app-name">Matias Invest</span>
-        </div>
-
-        <!-- Patrimônio -->
-        <div class="fp-pat-card">
-          <div class="fp-pat-label">Patrimônio total</div>
-          <div class="fp-pat-value">R$&thinsp;30,4k</div>
-          <div class="fp-pat-change">
-            <span class="fp-change-badge">↑ 12,4%</span>
-            <span class="fp-change-period">últimos 12m</span>
+          <div class="fp-approw">
+            <div class="fp-appdot"></div>
+            <span class="fp-appname">Matias Invest</span>
           </div>
-        </div>
 
-        <!-- Alocação bar -->
-        <div class="fp-alloc-section">
-          <div class="fp-alloc-label">Alocação</div>
-          <div class="fp-alloc-bar">
-            <span style="width:35%;background:#7B2FFF"></span>
-            <span style="width:30%;background:#00FFD1"></span>
-            <span style="width:20%;background:#FF2CF0;opacity:.5"></span>
-            <span style="width:10%;background:rgba(255,255,255,.12)"></span>
-            <span style="width:5%;background:rgba(255,255,255,.06)"></span>
+          <div class="fp-patcard">
+            <div class="fp-patlabel">Patrimônio</div>
+            <div class="fp-patval">R$&thinsp;30,4k</div>
+            <div class="fp-patchange">
+              <span class="fp-badge">↑ 12,4%</span>
+              <span class="fp-period">12 meses</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Ativo visível 1 -->
-        <div class="fp-asset-row">
-          <div class="fp-asset-dot" style="background:#7B2FFF"></div>
-          <div class="fp-asset-info">
-            <div class="fp-asset-ticker">WIZC3</div>
-            <div class="fp-asset-type">Ação · Renda Var.</div>
+          <div>
+            <div class="fp-alloclabel">Alocação</div>
+            <div class="fp-allocbar">
+              <span style="width:35%;background:#7B2FFF"></span>
+              <span style="width:30%;background:#00F5C4"></span>
+              <span style="width:20%;background:#FF2CF0;opacity:.45"></span>
+              <span style="width:10%;background:rgba(255,255,255,.1)"></span>
+              <span style="width:5%;background:rgba(255,255,255,.06)"></span>
+            </div>
           </div>
-          <div class="fp-asset-pct">35%</div>
-        </div>
 
-        <!-- Ativo visível 2 -->
-        <div class="fp-asset-row">
-          <div class="fp-asset-dot" style="background:#00FFD1"></div>
-          <div class="fp-asset-info">
-            <div class="fp-asset-ticker">BRBI11</div>
-            <div class="fp-asset-type">BDR · Internacional</div>
+          <div class="fp-row">
+            <div class="fp-rowdot" style="background:#7B2FFF"></div>
+            <div class="fp-rowinfo">
+              <div class="fp-rowticker">WIZC3</div>
+              <div class="fp-rowtype">Ação · R. Variável</div>
+            </div>
+            <div class="fp-rowpct">35%</div>
           </div>
-          <div class="fp-asset-pct">30%</div>
-        </div>
 
-        <!-- Bloqueados -->
-        <div class="fp-locked-row">
-          <span class="fp-lock-ico">🔒</span>
-          <span class="fp-lock-blur">████████</span>
-          <span class="fp-lock-pct">20%</span>
-        </div>
-        <div class="fp-locked-row">
-          <span class="fp-lock-ico">🔒</span>
-          <span class="fp-lock-blur">████████</span>
-          <span class="fp-lock-pct">10%</span>
-        </div>
-        <div class="fp-locked-row">
-          <span class="fp-lock-ico">🔒</span>
-          <span class="fp-lock-blur">████████</span>
-          <span class="fp-lock-pct">5%</span>
-        </div>
+          <div class="fp-row">
+            <div class="fp-rowdot" style="background:#00F5C4"></div>
+            <div class="fp-rowinfo">
+              <div class="fp-rowticker">BRBI11</div>
+              <div class="fp-rowtype">BDR · Internacional</div>
+            </div>
+            <div class="fp-rowpct">30%</div>
+          </div>
 
-        <!-- Hint -->
-        <div class="fp-unlock-hint">
-          <div class="fp-unlock-text">🔒 3 ativos bloqueados</div>
-        </div>
+          <div class="fp-locked">
+            <span class="fp-lockico">🔒</span>
+            <span class="fp-lockblur">████████</span>
+            <span class="fp-lockpct">20%</span>
+          </div>
+          <div class="fp-locked">
+            <span class="fp-lockico">🔒</span>
+            <span class="fp-lockblur">████████</span>
+            <span class="fp-lockpct">10%</span>
+          </div>
+          <div class="fp-locked">
+            <span class="fp-lockico">🔒</span>
+            <span class="fp-lockblur">████████</span>
+            <span class="fp-lockpct">5%</span>
+          </div>
 
+          <div class="fp-hint">
+            <span>🔒 3 ativos bloqueados</span>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- FEATURES -->
-<section id="features" style="max-width:960px;margin:0 auto">
-  <p class="section-label">// O que está incluído</p>
+<section id="features">
+  <p class="section-tag">// O que está incluído</p>
   <h2 class="section-title">Tudo que você vai<br>estudar no material</h2>
   <div class="features-grid">
     <div class="feat-card">
-      <div class="feat-icon">📊</div>
+      <div class="feat-num">01</div>
       <h3>Divisão Percentual Real</h3>
       <p>Veja exatamente como o portfólio é dividido entre renda fixa e variável, com os percentuais reais de cada ativo.</p>
     </div>
     <div class="feat-card">
-      <div class="feat-icon">🔄</div>
+      <div class="feat-num">02</div>
       <h3>Lógica de Rebalanceamento</h3>
       <p>Entenda como e quando rebalancear posições para manter a proporção ideal conforme o patrimônio cresce.</p>
     </div>
     <div class="feat-card">
-      <div class="feat-icon">🛡️</div>
+      <div class="feat-num">03</div>
       <h3>Estratégia de Proteção</h3>
       <p>Aprenda a combinar renda fixa como colchão de segurança enquanto busca crescimento em ativos de risco.</p>
     </div>
     <div class="feat-card">
-      <div class="feat-icon">📋</div>
+      <div class="feat-num">04</div>
       <h3>Planilha de Simulação</h3>
       <p>Ferramenta prática para simular seus próprios aportes e visualizar a distribuição ideal para qualquer valor.</p>
     </div>
     <div class="feat-card">
-      <div class="feat-icon">🏦</div>
+      <div class="feat-num">05</div>
       <h3>Plataformas Utilizadas</h3>
       <p>Saiba exatamente quais corretoras e ferramentas são usadas no dia a dia para executar cada operação.</p>
     </div>
     <div class="feat-card">
-      <div class="feat-icon">🧭</div>
+      <div class="feat-num">06</div>
       <h3>Mentalidade Financeira</h3>
       <p>A visão de longo prazo e os princípios que guiam cada decisão de alocação, da menor à maior posição.</p>
     </div>
@@ -933,30 +620,30 @@ footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;mar
 
 <!-- SIMULADOR -->
 <section id="simulador">
-  <p class="section-label" style="text-align:center">// Ferramenta interativa</p>
-  <h2 class="section-title" style="text-align:center;max-width:500px;margin:0 auto 40px">Simule a distribuição<br>com o seu valor</h2>
+  <p class="section-tag" style="text-align:center">// Ferramenta interativa</p>
+  <h2 class="section-title" style="text-align:center;max-width:480px;margin:0 auto 44px">Simule a distribuição<br>com o seu valor</h2>
   <div class="sim-card">
     <div class="sim-header">
       <div>
         <h2 class="sim-title">Simulador de Portfólio</h2>
-        <p style="font-size:.78rem;color:var(--muted);margin-top:4px">Baseado na distribuição real do material</p>
+        <p style="font-size:.73rem;color:var(--muted);margin-top:4px">Baseado na distribuição real do material</p>
       </div>
-      <div class="sim-display">
+      <div class="sim-disp">
         <small>Valor simulado</small>
-        <span id="disp">R$ 0,00</span>
+        <span id="disp">R$&nbsp;0,00</span>
       </div>
     </div>
     <div class="input-wrap">
       <span class="input-prefix">R$</span>
       <input type="text" id="val-input" placeholder="0,00" inputmode="decimal">
     </div>
-    <div class="warning-box">
+    <div class="warn-box">
       <span>⚠</span>
-      <span><strong style="color:rgba(255,220,100,.9)">Aviso:</strong> Este simulador é exclusivamente educacional. Os percentuais refletem escolhas pessoais de estudo. Não constitui recomendação de investimento. Cada perfil é único.</span>
+      <span><strong style="color:rgba(255,215,90,.8)">Aviso:</strong> Exclusivamente educacional. Os percentuais refletem escolhas pessoais de estudo. Não constitui recomendação de investimento.</span>
     </div>
     <div id="inv-list">
       <div class="zero-state">
-        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 3v18h18M18 9l-5 5-4-4-3 3"/></svg>
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M3 3v18h18M18 9l-5 5-4-4-3 3"/></svg>
         <p>Digite um valor para ver a distribuição</p>
       </div>
     </div>
@@ -973,31 +660,16 @@ footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;mar
     <h2 class="checkout-title">Acesso ao Modelo Completo de Organização Financeira</h2>
     <p class="checkout-sub">Desbloqueie todos os ativos, percentuais e a metodologia completa de distribuição de patrimônio utilizada no dia a dia.</p>
     <div class="checklist">
-      <div class="check-item">
-        <div class="check-ico"></div>
-        <p><strong>Portfólio 100% revelado:</strong> todos os 5 ativos com percentuais exatos e lógica de escolha explicada</p>
-      </div>
-      <div class="check-item">
-        <div class="check-ico"></div>
-        <p><strong>Planilha interativa:</strong> ferramenta de simulação e rebalanceamento para seus próprios aportes</p>
-      </div>
-      <div class="check-item">
-        <div class="check-ico"></div>
-        <p><strong>Estratégia de proteção:</strong> como estruturar renda fixa como base segura antes de arriscar em variável</p>
-      </div>
-      <div class="check-item">
-        <div class="check-ico"></div>
-        <p><strong>Plataformas e rotina:</strong> onde e como cada operação é feita, sem mistério</p>
-      </div>
-      <div class="check-item">
-        <div class="check-ico"></div>
-        <p><strong>Acesso imediato e vitalício:</strong> pague uma vez, estude para sempre</p>
-      </div>
+      <div class="check-item"><div class="check-ico"></div><p><strong>Portfólio 100% revelado:</strong> todos os 5 ativos com percentuais exatos e lógica de escolha explicada</p></div>
+      <div class="check-item"><div class="check-ico"></div><p><strong>Planilha interativa:</strong> ferramenta de simulação e rebalanceamento para seus próprios aportes</p></div>
+      <div class="check-item"><div class="check-ico"></div><p><strong>Estratégia de proteção:</strong> como estruturar renda fixa como base segura antes de arriscar em variável</p></div>
+      <div class="check-item"><div class="check-ico"></div><p><strong>Plataformas e rotina:</strong> onde e como cada operação é feita, sem mistério</p></div>
+      <div class="check-item"><div class="check-ico"></div><p><strong>Acesso imediato e vitalício:</strong> pague uma vez, estude para sempre</p></div>
     </div>
     <div class="price-block">
-      <div class="price-from">De <span>R$ 97,00</span> · por apenas</div>
-      <div class="price-main">R$ 39,90</div>
-      <div class="price-note">Pagamento único · Acesso imediato ao material</div>
+      <div class="price-from">De <span>R$&nbsp;97,00</span> · por apenas</div>
+      <div class="price-main">R$&nbsp;39,90</div>
+      <div class="price-note">Pagamento único · Acesso imediato</div>
     </div>
     <a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="btn-checkout">
       <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1013,22 +685,22 @@ footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;mar
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
-  <p class="section-label">// Quem já estudou</p>
+  <p class="section-tag">// Quem já estudou</p>
   <h2 class="section-title">Opiniões reais</h2>
   <div class="testi-grid">
     <div class="testi-card">
       <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="testi-text">"O material vale muito a pena. Eu estava confuso sobre as divisões básicas de finanças e consegui entender como estruturar e organizar minhas metas de forma clara."</p>
+      <p class="testi-text">"Estava confuso sobre as divisões básicas de finanças e consegui entender como estruturar minhas metas de forma clara."</p>
       <p class="testi-author">Rodrigo S.</p>
     </div>
     <div class="testi-card">
       <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="testi-text">"Ver como o portfólio é organizado me deu ótimos insights para os meus próprios estudos. Usei as ideias de proporção para aplicar na minha planilha. Prático e bem ilustrativo."</p>
+      <p class="testi-text">"Ver como o portfólio é organizado me deu ótimos insights. Usei as ideias de proporção para aplicar na minha planilha."</p>
       <p class="testi-author">Amanda Costa</p>
     </div>
     <div class="testi-card">
       <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="testi-text">"Excelente modelo de visão patrimonial. Entender a lógica de rebalanceamento me ajudou muito a clarear minha mente sobre finanças pessoais. Recomendo a todos iniciantes."</p>
+      <p class="testi-text">"A lógica de rebalanceamento me ajudou muito a clarear minha mente sobre finanças pessoais. Recomendo a todos iniciantes."</p>
       <p class="testi-author">Marcos Vinícius</p>
     </div>
   </div>
@@ -1038,55 +710,65 @@ footer p{font-size:.68rem;color:var(--muted);line-height:1.7;max-width:600px;mar
 <footer>
   <span class="foot-logo">MATIAS INVEST</span>
   <p>&copy; 2026 Matias Invest. Todos os direitos reservados.<br><br>
-  <em>AVISO LEGAL: O conteúdo deste site possui finalidade exclusivamente educativa e de registro de jornada pessoal. Não constitui recomendação, indicação, oferta ou solicitação de compra ou venda de ativos financeiros. O criador não possui certificação de consultor ou analista de valores mobiliários. Investimentos envolvem riscos e rentabilidade passada não garante resultados futuros.</em>
-  </p>
+  <em>AVISO LEGAL: O conteúdo deste site possui finalidade exclusivamente educativa e de registro de jornada pessoal. Não constitui recomendação, indicação, oferta ou solicitação de compra ou venda de ativos financeiros. O criador não possui certificação de consultor ou analista de valores mobiliários. Investimentos envolvem riscos e rentabilidade passada não garante resultados futuros.</em></p>
 </footer>
 
 <script>
-/* Floating phone: aparece após rolar 60% da hero */
-const floatingPhone = document.getElementById('floating-phone');
-window.addEventListener('scroll', () => {
+/* ─── Floating phone: visible only on desktop ≥1025px ─── */
+const fpWrap = document.getElementById('fp-wrap');
+
+function updatePhone(){
+  const isDesktop = window.innerWidth >= 1025;
+  if(!isDesktop){ fpWrap.classList.remove('fp-show'); return; }
   const sy = window.scrollY;
   const heroH = document.getElementById('hero').offsetHeight;
-  if(sy > heroH * 0.6){ floatingPhone.classList.add('visible'); }
-  else { floatingPhone.classList.remove('visible'); }
-}, { passive: true });
+  const bottomLimit = document.body.scrollHeight - window.innerHeight - 120;
+  if(sy > heroH * 0.5 && sy < bottomLimit){
+    fpWrap.style.top = '50%';
+    fpWrap.classList.add('fp-show');
+  } else {
+    fpWrap.classList.remove('fp-show');
+  }
+}
+window.addEventListener('scroll', updatePhone, {passive:true});
+window.addEventListener('resize', updatePhone, {passive:true});
+updatePhone();
 
-/* Reveal on scroll */
-function checkReveal() {
-  document.querySelectorAll('.feat-card, .testi-card').forEach((el, i) => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 80) {
-      setTimeout(() => el.classList.add('show'), i * 90);
+/* ─── Scroll reveal ─── */
+function checkReveal(){
+  document.querySelectorAll('.feat-card,.testi-card').forEach((el,i)=>{
+    if(el.getBoundingClientRect().top < window.innerHeight - 70){
+      setTimeout(()=>el.classList.add('show'), i*80);
     }
   });
 }
-window.addEventListener('scroll', checkReveal, { passive: true });
-window.addEventListener('DOMContentLoaded', checkReveal);
+window.addEventListener('scroll', checkReveal, {passive:true});
+checkReveal();
 
-/* Simulator */
+/* ─── Simulator ─── */
 const investments = [
-  { ticker:'WIZC3',  name:'Wiz Co',        type:'Ação · Renda Variável', pct:35, visible:true,  color:'teal',   icon:'📈' },
-  { ticker:'BRBI11', name:'BR Bitcoin BDR', type:'BDR · Renda Variável',  pct:30, visible:true,  color:'violet', icon:'₿'  },
-  { ticker:'██████', name:'████████',       type:'Tesouro · Renda Fixa',  pct:20, visible:false, color:'lock',   icon:'🔒' },
-  { ticker:'██████', name:'████████',       type:'FII · Renda Variável',  pct:10, visible:false, color:'lock',   icon:'🔒' },
-  { ticker:'██████', name:'████████',       type:'CDB · Renda Fixa',      pct:5,  visible:false, color:'lock',   icon:'🔒' },
+  {ticker:'WIZC3', name:'Wiz Co', type:'Ação · Renda Variável', pct:35, visible:true, color:'teal', icon:'📈'},
+  {ticker:'BRBI11', name:'BR Bitcoin BDR', type:'BDR · Renda Variável', pct:30, visible:true, color:'violet', icon:'₿'},
+  {ticker:'██████', name:'████████', type:'Tesouro · Renda Fixa', pct:20, visible:false, color:'lock', icon:'🔒'},
+  {ticker:'██████', name:'████████', type:'FII · Renda Variável', pct:10, visible:false, color:'lock', icon:'🔒'},
+  {ticker:'██████', name:'████████', type:'CDB · Renda Fixa', pct:5, visible:false, color:'lock', icon:'🔒'},
 ];
 
-function fmtBR(n){ return n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) }
+function fmtBR(n){return n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
 
 function formatInput(el){
   const raw = el.value.replace(/\D/g,'');
-  if(!raw){ el.value=''; document.getElementById('disp').textContent='R$ 0,00'; render(0); return; }
+  if(!raw){el.value='';document.getElementById('disp').textContent='R\u00a00,00';render(0);return;}
   const n = parseInt(raw)/100;
   el.value = n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-  document.getElementById('disp').textContent = 'R$ '+el.value;
+  document.getElementById('disp').textContent = 'R$\u00a0'+el.value;
   render(n);
 }
 
 function render(total){
   const c = document.getElementById('inv-list');
   if(total<=0){
-    c.innerHTML=`<div class="zero-state"><svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 3v18h18M18 9l-5 5-4-4-3 3"/></svg><p>Digite um valor para ver a distribuição</p></div>`;
+    c.innerHTML='<div class="zero-state"><svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M3 3v18h18M18 9l-5 5-4-4-3 3"/></svg><p>Digite um valor para ver a distribuição</p></div>';
     return;
   }
   const bars = investments.map(inv=>{
@@ -1094,55 +776,26 @@ function render(total){
     return `<div class="prog-seg" style="width:${inv.pct}%;background:${col};opacity:${inv.visible?1:.4}"></div>`;
   }).join('');
   let html = `<div class="prog-bar">${bars}</div>`;
-  html+=`<p class="sec-label">Ativos revelados</p><div class="inv-rows">`;
+  html += `<p class="sec-lbl">Ativos revelados</p><div class="inv-rows">`;
   investments.filter(i=>i.visible).forEach(inv=>{
-    const val=(total*inv.pct)/100;
+    const val = (total*inv.pct)/100;
     const pill = inv.color==='teal'?'pill-teal':'pill-violet';
     const tick = inv.color==='teal'?'ticker-teal':'ticker-violet';
-    const ico  = inv.color==='teal'?'ico-teal':'ico-violet';
-    html+=`<div class="inv-row live">
-      <div class="inv-ico ${ico}">${inv.icon}</div>
-      <div style="flex:1;min-width:0">
-        <div class="inv-ticker ${tick}">${inv.ticker}</div>
-        <div class="inv-sub">${inv.name} · ${inv.type}</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0">
-        <span class="pct-pill ${pill}">${inv.pct}%</span>
-        <div class="inv-val" style="margin-top:5px">R$ ${fmtBR(val)}</div>
-      </div>
-    </div>`;
+    const ico = inv.color==='teal'?'ico-teal':'ico-violet';
+    html += `<div class="inv-row live"><div class="inv-ico ${ico}">${inv.icon}</div><div style="flex:1;min-width:0"><div class="inv-ticker ${tick}">${inv.ticker}</div><div class="inv-sub">${inv.name} · ${inv.type}</div></div><div style="text-align:right;flex-shrink:0"><span class="pct-pill ${pill}">${inv.pct}%</span><div class="inv-val" style="margin-top:4px">R$&nbsp;${fmtBR(val)}</div></div></div>`;
   });
-  html+=`</div><div class="divider"></div>`;
-  html+=`<p class="sec-label">Ativos bloqueados</p><div class="inv-rows">`;
+  html += `</div><div class="divider"></div><p class="sec-lbl">Ativos bloqueados</p><div class="inv-rows">`;
   investments.filter(i=>!i.visible).forEach(inv=>{
-    const val=(total*inv.pct)/100;
-    html+=`<div class="inv-row">
-      <div class="inv-ico ico-lock">🔒</div>
-      <div style="flex:1;min-width:0">
-        <div class="inv-ticker ticker-lock blur-v">${inv.ticker}</div>
-        <div class="inv-sub">${inv.type}</div>
-        <span class="lock-chip">🔒 Bloqueado</span>
-      </div>
-      <div style="text-align:right;flex-shrink:0">
-        <span class="pct-pill pill-lock">${inv.pct}%</span>
-        <div class="inv-val blur-v" style="margin-top:5px">R$ ${fmtBR(val)}</div>
-      </div>
-    </div>`;
+    const val = (total*inv.pct)/100;
+    html += `<div class="inv-row"><div class="inv-ico ico-lock">🔒</div><div style="flex:1;min-width:0"><div class="inv-ticker ticker-lock blur-v">${inv.ticker}</div><div class="inv-sub">${inv.type}</div><span class="lock-chip">🔒 Bloqueado</span></div><div style="text-align:right;flex-shrink:0"><span class="pct-pill pill-lock">${inv.pct}%</span><div class="inv-val blur-v" style="margin-top:4px">R$&nbsp;${fmtBR(val)}</div></div></div>`;
   });
-  html+=`</div>`;
-  html+=`<div class="total-row"><span>Total simulado</span><span>R$ ${fmtBR(total)}</span></div>`;
+  html += `</div><div class="total-row"><span>Total simulado</span><span>R$&nbsp;${fmtBR(total)}</span></div>`;
   const locked = investments.filter(i=>!i.visible).length;
-  html+=`<div class="unlock-box">
-    <p class="u-tag">🔒 ${locked} investimentos ocultos</p>
-    <p class="u-desc">Descubra os ativos, percentuais exatos e a lógica por trás de cada escolha no material completo.</p>
-    <a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="btn-unlock">
-      🔓 Desbloquear por R$ 39,90
-    </a>
-  </div>`;
-  c.innerHTML=html;
+  html += `<div class="unlock-box"><p class="u-tag">🔒 ${locked} investimentos ocultos</p><p class="u-desc">Descubra os ativos, percentuais exatos e a lógica por trás de cada escolha no material completo.</p><a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="btn-unlock">🔓 Desbloquear por R$&nbsp;39,90</a></div>`;
+  c.innerHTML = html;
 }
 
-document.getElementById('val-input').addEventListener('input',function(){ formatInput(this) });
+document.getElementById('val-input').addEventListener('input',function(){formatInput(this)});
 </script>
 </body>
 </html>
