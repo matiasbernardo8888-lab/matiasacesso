@@ -502,22 +502,19 @@ body {
 .simulator-prefix {
   padding: 0 14px; font-family: var(--font-display); font-size: 0.95rem;
   font-weight: 600; color: var(--neon); background: rgba(56,189,248,0.07);
-  border-right: 1px solid var(--border-subtle); height: 48px;
+  border-right: 1px solid var(--border-subtle); height: 52px;
   display: flex; align-items: center; flex-shrink: 0;
 }
 .simulator-input {
   flex: 1; background: transparent; border: none; outline: none;
   color: var(--text-white); font-family: var(--font-display); font-size: 1.05rem;
-  font-weight: 600; padding: 0 16px; height: 48px; caret-color: var(--neon);
+  font-weight: 600; padding: 0 16px; height: 52px; caret-color: var(--neon);
 }
 .simulator-input::placeholder { color: var(--text-dimmer); font-weight: 400; }
-.simulator-btn {
-  height: 48px; padding: 0 20px; background: linear-gradient(135deg, #0EA5E9, #1D4ED8);
-  border: none; color: #fff; font-family: var(--font-display); font-size: 0.82rem;
-  font-weight: 600; cursor: pointer; transition: var(--transition); white-space: nowrap;
-  flex-shrink: 0;
+.simulator-btn-full {
+  width: 100%; justify-content: center; font-size: 0.95rem;
+  padding: 15px 24px; border-radius: var(--radius-md);
 }
-.simulator-btn:hover { background: linear-gradient(135deg, #38BDF8, #2563EB); }
 
 .simulator-result { display: none; flex-direction: column; gap: 10px; }
 .simulator-result.visible { display: flex; }
@@ -826,8 +823,13 @@ body {
               maxlength="15"
               autocomplete="off"
             />
-            <button class="simulator-btn" id="sim-btn">Simular</button>
           </div>
+          <button class="simulator-btn-full btn-primary btn-glow" id="sim-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            Simular alocação
+          </button>
           <div class="simulator-result" id="sim-result">
             <div class="sim-total-label">Distribuição sugerida para <strong id="sim-total-display" style="color:var(--text-white)"></strong></div>
             <!-- XPML11 -->
