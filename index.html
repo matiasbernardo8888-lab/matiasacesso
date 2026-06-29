@@ -466,6 +466,110 @@ body::after{
 .testi-name{font-size:.75rem;font-weight:700;color:#fff}
 .testi-label{font-size:.62rem;color:var(--muted);margin-top:1px}
 
+/* ── TIMER ── */
+.timer-bar{
+  background:linear-gradient(90deg,rgba(255,74,106,.07),rgba(255,74,106,.12),rgba(255,74,106,.07));
+  border:1px solid rgba(255,74,106,.2);border-radius:14px;
+  padding:16px 20px;margin-bottom:28px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.timer-left{display:flex;align-items:center;gap:8px}
+.timer-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:ldot 1.4s ease infinite;flex-shrink:0}
+.timer-label{font-size:.7rem;font-weight:700;color:rgba(255,74,106,.9);letter-spacing:.06em;text-transform:uppercase}
+.timer-digits{display:flex;align-items:center;gap:4px}
+.td{
+  font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;color:#fff;
+  background:rgba(0,0,0,.4);border:1px solid rgba(255,74,106,.2);
+  border-radius:6px;padding:4px 10px;min-width:38px;text-align:center;line-height:1;
+}
+.tc{font-family:'Space Mono',monospace;font-size:1rem;color:rgba(255,74,106,.5);font-weight:700}
+
+/* ── SOCIAL PROOF BAR ── */
+.social-proof-bar{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:rgba(0,229,176,.04);border:1px solid rgba(0,229,176,.1);
+  border-radius:10px;padding:12px 16px;margin-bottom:28px;flex-wrap:wrap;
+}
+.sp-avatars{display:flex}
+.sp-av{
+  width:26px;height:26px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:2px solid #0D1020;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.58rem;font-weight:800;color:#03040A;
+  margin-left:-8px;flex-shrink:0;
+}
+.sp-av:first-child{margin-left:0}
+.sp-text{font-size:.72rem;color:rgba(0,229,176,.8);font-weight:700}
+.sp-text span{color:rgba(242,238,248,.4)}
+
+/* ── COMPARAÇÃO DE VALOR ── */
+.value-compare{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:28px;
+}
+.vc-item{
+  background:rgba(3,4,10,.6);border:1px solid rgba(255,255,255,.05);
+  border-radius:12px;padding:14px 10px;text-align:center;
+}
+.vc-item.highlight{border-color:rgba(240,192,64,.25);background:rgba(240,192,64,.04)}
+.vc-emoji{font-size:1.3rem;margin-bottom:6px;display:block}
+.vc-label{font-size:.62rem;color:var(--muted);margin-bottom:4px;display:block;line-height:1.4}
+.vc-price{font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700}
+.vc-price.muted{color:rgba(90,84,112,.7);text-decoration:line-through}
+.vc-price.gold{color:var(--gold)}
+
+/* ── FAQ ── */
+#faq{position:relative;z-index:1;padding:70px 32px 20px;max-width:680px;margin:0 auto}
+.faq-list{display:flex;flex-direction:column;gap:8px;margin-top:32px}
+.faq-item{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:14px;overflow:hidden;
+  transition:border-color .2s;
+}
+.faq-item.open{border-color:rgba(240,192,64,.2)}
+.faq-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 20px;background:none;border:none;color:#fff;cursor:pointer;
+  text-align:left;
+}
+.faq-q span{font-size:.85rem;font-weight:700;line-height:1.4}
+.faq-icon{
+  width:22px;height:22px;border-radius:6px;flex-shrink:0;
+  background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;color:var(--gold);transition:transform .25s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;
+}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a p{font-size:.8rem;color:rgba(242,238,248,.45);line-height:1.75;padding:0 20px 18px}
+.faq-a strong{color:rgba(242,238,248,.75)}
+
+/* ── CTA FINAL PÓS DEPOIMENTOS ── */
+#final-cta{position:relative;z-index:1;padding:60px 32px 80px;max-width:600px;margin:0 auto;text-align:center}
+.final-cta-card{
+  background:linear-gradient(160deg,#0D1020,#08090F);
+  border:1px solid rgba(240,192,64,.2);border-radius:24px;padding:44px 36px;
+  position:relative;overflow:hidden;
+}
+.final-cta-card::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:200px;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.final-cta-card::after{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:300px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(240,192,64,.06),transparent 70%);pointer-events:none}
+.fct-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,192,64,.5);font-weight:700;margin-bottom:12px}
+.fct-title{font-size:clamp(1.4rem,4vw,2rem);font-weight:800;line-height:1.1;margin-bottom:8px}
+.fct-sub{font-size:.82rem;color:rgba(242,238,248,.35);line-height:1.75;margin-bottom:28px}
+.btn-final{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--gold);color:#03040A;font-weight:800;font-size:.9rem;
+  letter-spacing:.05em;text-transform:uppercase;
+  padding:18px 36px;border-radius:12px;text-decoration:none;width:100%;
+  box-shadow:0 8px 40px rgba(240,192,64,.3);transition:all .2s;
+  position:relative;overflow:hidden;animation:pulse-gold 2.5s ease-out infinite;
+}
+.btn-final:hover{transform:translateY(-2px);box-shadow:0 14px 50px rgba(240,192,64,.45)}
+.fct-note{margin-top:14px;font-size:.65rem;color:rgba(90,84,112,.6)}
+
 /* ── FOOTER ── */
 footer{position:relative;z-index:1;border-top:1px solid var(--border2);padding:44px 32px;text-align:center}
 .foot-logo{display:block;font-weight:800;font-size:1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
@@ -699,15 +803,99 @@ footer p{font-size:.65rem;color:rgba(90,84,112,.6);line-height:1.8;max-width:600
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <p class="section-tag" style="text-align:center">// Dúvidas frequentes</p>
+  <h2 class="section-title" style="text-align:center;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:0">Perguntas antes de comprar</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>É para quem nunca investiu antes?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>Sim. O material foi feito pensando em quem está começando do zero. Você não precisa entender de bolsa ou renda fixa para acompanhar — a explicação vai do nome do ativo até o percentual exato que alocar. <strong>Se você tem dúvida de por onde começar, esse é exatamente o ponto de partida.</strong></p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Posso aplicar tendo pouco dinheiro?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>Sim. A metodologia funciona para qualquer valor — o simulador aqui mesmo mostra a divisão proporcional para R$&nbsp;100, R$&nbsp;500 ou R$&nbsp;10.000. <strong>O tamanho do aporte não importa, a proporção é a mesma.</strong></p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>Como acesso depois de pagar?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>O acesso é <strong>imediato</strong> — assim que o pagamento é confirmado você recebe o link diretamente por e-mail. Não tem app para instalar, não tem senha para criar. E como é vitalício, você acessa quando quiser, para sempre.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>E se eu não gostar? Posso pedir reembolso?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>Pode sim. A garantia é de <strong>7 dias incondicionais</strong> — se por qualquer motivo o material não fizer sentido pra você, é só pedir o reembolso que devolvemos 100% do valor. Sem perguntas, sem burocracia.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- CHECKOUT -->
 <section id="checkout">
   <div class="checkout-card">
+
+    <!-- TIMER -->
+    <div class="timer-bar">
+      <div class="timer-left">
+        <span class="timer-dot"></span>
+        <span class="timer-label">Oferta expira em</span>
+      </div>
+      <div class="timer-digits">
+        <span class="td" id="t-h">00</span>
+        <span class="tc">:</span>
+        <span class="td" id="t-m">00</span>
+        <span class="tc">:</span>
+        <span class="td" id="t-s">00</span>
+      </div>
+    </div>
+
+    <!-- PROVA SOCIAL -->
+    <div class="social-proof-bar">
+      <div class="sp-avatars">
+        <div class="sp-av">RS</div>
+        <div class="sp-av">AC</div>
+        <div class="sp-av">MV</div>
+        <div class="sp-av">LF</div>
+        <div class="sp-av">JP</div>
+      </div>
+      <span class="sp-text">+127 pessoas acessaram <span>esta semana</span></span>
+    </div>
+
     <div class="co-badge">
       <span class="ldot"></span>
       Oferta de Lançamento
     </div>
     <h2 class="co-title">Acesso ao Modelo Completo de Organização Financeira</h2>
-    <p class="co-sub">Desbloqueie todos os ativos, percentuais reais e a metodologia completa usada no dia a dia para construir e manter um portfólio organizado.</p>
+    <p class="co-sub">Funciona se você tem <strong style="color:rgba(242,238,248,.75)">a partir de R$&nbsp;100 para investir</strong> — do iniciante que nunca aplicou ao que já investe mas não tem método.</p>
+
+    <!-- COMPARAÇÃO DE VALOR -->
+    <div class="value-compare">
+      <div class="vc-item">
+        <span class="vc-emoji">🍔</span>
+        <span class="vc-label">Lanche no shopping</span>
+        <span class="vc-price muted">R$ 35</span>
+      </div>
+      <div class="vc-item">
+        <span class="vc-emoji">📺</span>
+        <span class="vc-label">Streaming por mês</span>
+        <span class="vc-price muted">R$ 22</span>
+      </div>
+      <div class="vc-item highlight">
+        <span class="vc-emoji">📊</span>
+        <span class="vc-label">Portfólio real vitalício</span>
+        <span class="vc-price gold">R$ 19,90</span>
+      </div>
+    </div>
+
     <div class="checklist">
       <div class="check-item"><div class="check-ico">✓</div><p><strong>Portfólio 100% revelado:</strong> todos os 5 ativos com percentuais exatos e lógica de escolha explicada</p></div>
       <div class="check-item"><div class="check-ico">✓</div><p><strong>Planilha interativa:</strong> ferramenta de simulação e rebalanceamento para seus próprios aportes</p></div>
@@ -768,6 +956,19 @@ footer p{font-size:.65rem;color:rgba(90,84,112,.6);line-height:1.8;max-width:600
   </div>
 </section>
 
+<!-- CTA FINAL PÓS DEPOIMENTOS -->
+<section id="final-cta">
+  <div class="final-cta-card">
+    <p class="fct-label">✅ Você leu os depoimentos. Agora é sua vez.</p>
+    <h2 class="fct-title">Pronto para organizar seu patrimônio de verdade?</h2>
+    <p class="fct-sub">Por menos do que um lanche, você acessa o portfólio real, os ativos, os percentuais e a metodologia completa — acesso imediato e vitalício.</p>
+    <a href="https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq" class="btn-final">
+      🔓 Quero Acesso Agora por R$&nbsp;19,90
+    </a>
+    <p class="fct-note">🛡️ 7 dias de garantia total · Pagamento seguro · Acesso em segundos</p>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <span class="foot-logo">MATIAS INVEST</span>
@@ -786,6 +987,40 @@ function checkReveal(){
 }
 window.addEventListener('scroll', checkReveal, {passive:true});
 checkReveal();
+
+/* ── Timer regressivo (reinicia a cada 24h) ── */
+(function(){
+  const KEY = 'mi_timer_end';
+  let end = parseInt(localStorage.getItem(KEY)||'0');
+  if(!end || end < Date.now()){
+    end = Date.now() + 23*60*60*1000 + 47*60*1000; // ~23h47
+    localStorage.setItem(KEY, end);
+  }
+  function tick(){
+    const diff = Math.max(0, end - Date.now());
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const pad = n=>String(n).padStart(2,'0');
+    const th=document.getElementById('t-h');
+    const tm=document.getElementById('t-m');
+    const ts=document.getElementById('t-s');
+    if(th) th.textContent=pad(h);
+    if(tm) tm.textContent=pad(m);
+    if(ts) ts.textContent=pad(s);
+    if(diff===0){ localStorage.removeItem(KEY); }
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+
+/* ── FAQ accordion ── */
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
 
 /* ── Dados dos investimentos ── */
 const investments = [
