@@ -99,6 +99,22 @@ body {
 }
 .btn-ghost:hover { border-color: var(--border-neon); color: var(--neon); }
 
+/* --- CTA PULSE (botão principal de conversão) --- */
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(56,189,248,0.4), 0 8px 40px rgba(14,165,233,0.4); }
+  50%      { box-shadow: 0 0 0 3px rgba(56,189,248,0.55), 0 10px 50px rgba(14,165,233,0.6); }
+}
+.btn-cta-pulse { animation: ctaPulse 2.2s ease-in-out infinite; }
+.cta-urgency {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; color: var(--warning); font-weight: 600;
+  justify-content: center;
+}
+.cta-urgency-dot {
+  width: 6px; height: 6px; background: var(--warning); border-radius: 50%;
+  box-shadow: 0 0 6px var(--warning); animation: pulse-dot 1.4s ease-in-out infinite; flex-shrink: 0;
+}
+
 /* ==========================================
    TELA INICIAL
 ========================================== */
@@ -620,7 +636,7 @@ body {
 
       <div class="intro-badge">
         <span class="badge-dot"></span>
-        <span>Análise gratuita · 2 minutos</span>
+        <span>Análise gratuita · 1 minuto</span>
       </div>
 
       <h1 class="intro-headline">
@@ -641,8 +657,8 @@ body {
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
-          <span class="stat-num">8 perguntas</span>
-          <span class="stat-label">análise completa</span>
+          <span class="stat-num">5 perguntas</span>
+          <span class="stat-label">análise rápida</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
@@ -678,7 +694,7 @@ body {
           <div class="progress-bar">
             <div class="progress-fill" id="progress-fill"></div>
           </div>
-          <span class="progress-label" id="progress-label">1 / 8</span>
+          <span class="progress-label" id="progress-label">1 / 5</span>
         </div>
       </header>
       <main class="quiz-body">
@@ -723,15 +739,15 @@ body {
           <div class="load-dot"></div>
           <span>Processando seu perfil financeiro</span>
         </div>
-        <div class="load-step" data-delay="1000">
+        <div class="load-step" data-delay="700">
           <div class="load-dot"></div>
           <span>Mapeando oportunidades compatíveis</span>
         </div>
-        <div class="load-step" data-delay="2200">
+        <div class="load-step" data-delay="1500">
           <div class="load-dot"></div>
           <span>Identificando seu nível de conhecimento</span>
         </div>
-        <div class="load-step" data-delay="3400">
+        <div class="load-step" data-delay="2300">
           <div class="load-dot"></div>
           <span>Preparando sua análise personalizada</span>
         </div>
@@ -751,6 +767,13 @@ body {
         </div>
         <h2 class="result-title" id="result-title">Seu perfil está pronto!</h2>
         <p class="result-intro" id="result-intro"></p>
+        <button class="btn-primary btn-large btn-glow btn-cta-pulse" id="btn-unlock-top" style="margin-top:4px">
+          <span>🔓 LIBERAR ACESSO</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
       </div>
 
       <div class="result-cards" id="result-cards"></div>
@@ -930,12 +953,12 @@ body {
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
-            Ver todos
+            🔓 LIBERAR ACESSO
           </button>
         </div>
       </div>
 
-      <!-- CTA DESBLOQUEAR -->
+      <!-- CTA DESBLOQUEAR (botão principal de conversão) -->
       <div class="result-cta-wrap">
         <div class="result-unlock-box">
           <div class="unlock-header">
@@ -946,8 +969,14 @@ body {
             <span>Desbloqueie o acesso completo</span>
           </div>
           <ul class="unlock-list" id="unlock-list"></ul>
-          <button class="btn-primary btn-large btn-glow" id="btn-unlock">
-            <span>Quero organizar meus investimentos</span>
+
+          <div class="cta-urgency">
+            <span class="cta-urgency-dot"></span>
+            <span>Sua análise personalizada está pronta agora</span>
+          </div>
+
+          <button class="btn-primary btn-large btn-glow btn-cta-pulse" id="btn-unlock">
+            <span>🔓 LIBERAR ACESSO</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
               <line x1="5" y1="12" x2="19" y2="12"/>
               <polyline points="12 5 19 12 12 19"/>
@@ -964,15 +993,15 @@ body {
   <script>
 /* =============================================
    MATIAS INVEST — QUIZ PREMIUM
-   JavaScript — Lógica completa
+   JavaScript — Lógica completa (versão de 5 perguntas)
 ============================================= */
 
 // ============================================
-// PERGUNTAS DO QUIZ
+// PERGUNTAS DO QUIZ (5 perguntas)
 // ============================================
 const QUESTIONS = [
   {
-    id: 1, label: "Pergunta 1 de 8",
+    id: 1, label: "Pergunta 1 de 5",
     title: "Quanto você possui disponível para investir agora?",
     subtitle: "Considere o valor que você pode investir sem comprometer seu dia a dia.",
     gridCols: 2, motivational: null,
@@ -984,7 +1013,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 2, label: "Pergunta 2 de 8",
+    id: 2, label: "Pergunta 2 de 5",
     title: "Qual é o seu principal objetivo financeiro?",
     subtitle: "Escolha o que mais se aproxima do que você busca agora.",
     gridCols: 2,
@@ -997,19 +1026,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 3, label: "Pergunta 3 de 8",
-    title: "Por quanto tempo você pretende manter seus investimentos?",
-    subtitle: "O prazo influencia muito quais opções ficam disponíveis para você.",
-    gridCols: 2, motivational: null,
-    options: [
-      { icon: "⚡", label: "Menos de 1 ano",  sub: "Curto prazo",  value: "curto" },
-      { icon: "🕐", label: "1 a 3 anos",       sub: "Médio prazo",  value: "medio" },
-      { icon: "📅", label: "3 a 10 anos",       sub: "Longo prazo",  value: "longo" },
-      { icon: "♾️", label: "Mais de 10 anos",   sub: "Muito longo",  value: "muitolongo" },
-    ],
-  },
-  {
-    id: 4, label: "Pergunta 4 de 8",
+    id: 3, label: "Pergunta 3 de 5",
     title: "Você já investe atualmente?",
     subtitle: "Sem julgamentos — queremos entender seu momento.",
     gridCols: 1,
@@ -1022,7 +1039,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 5, label: "Pergunta 5 de 8",
+    id: 4, label: "Pergunta 4 de 5",
     title: "Como você se avalia em conhecimento sobre investimentos?",
     subtitle: "Seja honesto — isso ajuda a traçar o melhor caminho.",
     gridCols: 2, motivational: null,
@@ -1034,32 +1051,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 6, label: "Pergunta 6 de 8",
-    title: "Você já possui uma carteira de investimentos organizada?",
-    subtitle: "Uma carteira organizada é o primeiro passo para resultados mais consistentes.",
-    gridCols: 1,
-    motivational: { text: "<strong>Quase lá!</strong> Suas respostas estão revelando um perfil bastante específico. Continue para ver o resultado." },
-    options: [
-      { icon: "❌", label: "Não possuo nenhum investimento ainda",        sub: null, value: "nao" },
-      { icon: "🗂️", label: "Tenho alguns ativos, mas não organizados",    sub: null, value: "desorg" },
-      { icon: "📋", label: "Tenho uma carteira, mas quero reorganizá-la", sub: null, value: "reorganizar" },
-      { icon: "✅", label: "Sim, tenho tudo bem organizado",              sub: null, value: "organizado" },
-    ],
-  },
-  {
-    id: 7, label: "Pergunta 7 de 8",
-    title: "Quanto pretende investir mensalmente?",
-    subtitle: "O aporte mensal é um dos segredos do crescimento consistente.",
-    gridCols: 2, motivational: null,
-    options: [
-      { icon: "🪙", label: "Até R$ 200/mês",          sub: "Começando devagar",     value: "ate200" },
-      { icon: "💸", label: "R$ 200 a R$ 1.000/mês",   sub: "Ritmo moderado",        value: "200a1k" },
-      { icon: "💰", label: "R$ 1.000 a R$ 5.000/mês", sub: "Ritmo acelerado",       value: "1ka5k" },
-      { icon: "🚀", label: "Mais de R$ 5.000/mês",    sub: "Alto comprometimento",  value: "5k" },
-    ],
-  },
-  {
-    id: 8, label: "Pergunta 8 de 8",
+    id: 5, label: "Pergunta 5 de 5",
     title: "O que você mais procura em uma plataforma de investimentos?",
     subtitle: "Isso nos ajuda a mostrar como a plataforma pode fazer sentido para você.",
     gridCols: 1, motivational: null,
@@ -1098,7 +1090,7 @@ function buildResultValues(ans) {
   return {
     investimentos: inv[ans[0]] || "Diversas opções",
     carteira:      "Disponível para seus ativos atuais",
-    conteudo:      (ans[4] === "iniciante" || ans[4] === "basico") ? "Trilha para iniciantes selecionada" : "Trilha intermediária/avançada",
+    conteudo:      (ans[3] === "iniciante" || ans[3] === "basico") ? "Trilha para iniciantes selecionada" : "Trilha intermediária/avançada",
     pesquisa:      "Busca por nome + simulação de valor",
   };
 }
@@ -1249,7 +1241,7 @@ function startLoading() {
       setTimeout(() => step.classList.add("done"), 500);
     }, delay);
   });
-  setTimeout(() => { buildResult(); showScreen("screen-result"); }, 4800);
+  setTimeout(() => { buildResult(); showScreen("screen-result"); }, 3200);
 }
 
 // ============================================
@@ -1359,6 +1351,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnUnlock = $("#btn-unlock");
   if (btnUnlock) btnUnlock.addEventListener("click", () => {
+    window.open("https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq", "_blank");
+  });
+
+  const btnUnlockTop = $("#btn-unlock-top");
+  if (btnUnlockTop) btnUnlockTop.addEventListener("click", () => {
     window.open("https://pay.cakto.com.br/3axttkx_925499?affiliate=hRmkgpHq", "_blank");
   });
 
