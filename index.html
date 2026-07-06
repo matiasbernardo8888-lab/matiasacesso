@@ -118,12 +118,12 @@ body {
 /* ==========================================
    TELA INICIAL
 ========================================== */
-#screen-intro { background: var(--bg-black); }
+#screen-intro { background: var(--bg-black); align-items: flex-start; padding-top: 48px; }
 
 .intro-wrapper {
   max-width: 680px; width: 100%; text-align: center;
   display: flex; flex-direction: column; align-items: center;
-  gap: 28px; padding: 40px 0;
+  gap: 28px; padding: 24px 0 60px;
 }
 .intro-brand {
   display: flex; align-items: center; gap: 10px;
@@ -168,6 +168,7 @@ body {
   font-weight: 600; line-height: 1.45;
   color: var(--text-white);
   max-width: 540px;
+  margin-top: 10px;
 }
 .intro-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; max-width: 540px; }
 
@@ -195,6 +196,7 @@ body {
   background: #000;
   border: 1px solid var(--border-neon);
   box-shadow: 0 8px 40px rgba(14,165,233,0.2), 0 0 0 1px rgba(56,189,248,0.08);
+  margin-top: 14px;
 }
 #explainer-video {
   width: 100%; height: 100%;
@@ -1230,18 +1232,24 @@ function initParticles() {
 // ============================================
 // VÍDEO EXPLICATIVO NA TELA INICIAL
 // ============================================
-let audioUnlocked = false;
-
-function tryUnmuteAudio() {
-  if (audioUnlocked) return;
+function unmuteExplainerVideo() {
   const video = $("#explainer-video");
   const unmuteHint = $("#btn-unmute");
   if (!video) return;
-  audioUnlocked = true;
+
   video.muted = false;
   video.volume = 1;
-  if (unmuteHint) unmuteHint.classList.remove("visible");
-  video.play().catch(() => {});
+
+  if (video.paused) {
+    video.play().then(() => {
+      if (unmuteHint) unmuteHint.classList.remove("visible");
+    }).catch(() => {
+      // Se o navegador ainda bloquear, mantém a dica visível para nova tentativa
+      if (unmuteHint) unmuteHint.classList.add("visible");
+    });
+  } else {
+    if (unmuteHint) unmuteHint.classList.remove("visible");
+  }
 }
 
 function initIntroVideo() {
@@ -1257,16 +1265,20 @@ function initIntroVideo() {
   if (playPromise !== undefined) {
     playPromise.then(() => {
       if (unmuteHint) unmuteHint.classList.add("visible");
-    }).catch(() => {});
+    }).catch(() => {
+      if (unmuteHint) unmuteHint.classList.add("visible");
+    });
+  } else {
+    if (unmuteHint) unmuteHint.classList.add("visible");
   }
 
-  if (unmuteHint) unmuteHint.addEventListener("click", tryUnmuteAudio);
-
-  // Assim que o usuário interagir com a página pela primeira vez
-  // (clique, toque ou tecla), o áudio é ativado automaticamente.
-  ["click", "touchstart", "keydown"].forEach(evt => {
-    document.addEventListener(evt, tryUnmuteAudio, { once: true, passive: true });
-  });
+  if (unmuteHint) {
+    unmuteHint.addEventListener("click", unmuteExplainerVideo);
+    unmuteHint.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      unmuteExplainerVideo();
+    });
+  }
 }
 
 // ============================================
