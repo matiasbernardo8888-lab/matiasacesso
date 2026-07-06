@@ -153,14 +153,21 @@ body {
 
 .intro-headline {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 700; line-height: 1.15;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700; line-height: 1.2;
   letter-spacing: -0.02em; color: var(--text-white);
 }
 .headline-gradient {
   background: linear-gradient(90deg, var(--neon) 0%, #818CF8 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+.intro-highlight {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.6vw, 1.2rem);
+  font-weight: 600; line-height: 1.45;
+  color: var(--text-white);
+  max-width: 540px;
 }
 .intro-sub { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; max-width: 540px; }
 
@@ -650,7 +657,7 @@ body {
   .stat-divider { width: 40px; height: 1px; }
   .options-grid { grid-template-columns: 1fr; }
   .result-cards { grid-template-columns: 1fr; }
-  .intro-headline { font-size: 1.9rem; }
+  .intro-headline { font-size: 1.5rem; }
   .quiz-body { padding: 32px 16px 48px; }
   .result-wrapper { padding: 40px 16px 60px; }
   .result-unlock-box { padding: 24px 18px; }
@@ -688,10 +695,12 @@ body {
       </div>
 
       <h1 class="intro-headline">
-        Descubra quais<br />
-        <span class="headline-gradient">oportunidades de investimento</span><br />
-        são compatíveis com você
+        Encontre seu perfil de investidor
       </h1>
+
+      <p class="intro-highlight">
+        Descubra quais <span class="headline-gradient">oportunidades de investimento</span> são compatíveis com você
+      </p>
 
       <p class="intro-sub">
         Responda algumas perguntas rápidas e veja, com base no seu perfil,<br class="hide-mobile" />
