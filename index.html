@@ -595,6 +595,51 @@ body {
 .inv-alloc-pill.hidden { display: none; }
 
 /* ==========================================
+   VÍDEO DE CREDIBILIDADE — TELA INICIAL
+========================================== */
+.intro-video-wrap {
+  width: min(42vw, 220px);
+  max-width: 220px;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 8px 40px rgba(56,189,248,0.18), 0 4px 24px rgba(0,0,0,0.4);
+  background: var(--bg-card);
+  position: relative;
+}
+.intro-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.intro-video-badge {
+  position: absolute; top: 12px; left: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(8,11,16,0.65); backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  padding: 5px 12px; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 600; color: var(--text-white);
+  z-index: 2;
+}
+.intro-video-badge .live-dot {
+  width: 6px; height: 6px; background: #ef4444; border-radius: 50%;
+  box-shadow: 0 0 6px #ef4444; animation: pulse-dot 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.intro-video-mute {
+  position: absolute; bottom: 12px; right: 12px;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(8,11,16,0.65); backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 2; transition: var(--transition);
+}
+.intro-video-mute:hover { border-color: var(--border-neon); }
+.intro-video-mute svg { width: 16px; height: 16px; color: var(--text-white); }
+
+/* ==========================================
    RESPONSIVO
 ========================================== */
 @media (max-width: 600px) {
@@ -608,6 +653,11 @@ body {
   .result-unlock-box { padding: 24px 18px; }
   .hide-mobile { display: none; }
   .inv-more-locked { flex-direction: column; align-items: flex-start; }
+  .intro-video-wrap { width: min(38vw, 150px); max-width: 150px; }
+  .intro-video-badge { font-size: 0.62rem; padding: 4px 9px; top: 8px; left: 8px; }
+  .intro-video-badge .live-dot { width: 5px; height: 5px; }
+  .intro-video-mute { width: 26px; height: 26px; bottom: 8px; right: 8px; }
+  .intro-video-mute svg { width: 12px; height: 12px; }
 }
 
 /* Scrollbar */
@@ -649,6 +699,21 @@ body {
         Responda algumas perguntas rápidas e veja, com base no seu perfil,<br class="hide-mobile" />
         quais investimentos e ferramentas fazem mais sentido para o seu momento.
       </p>
+
+      <!-- VÍDEO DE CREDIBILIDADE -->
+      <div class="intro-video-wrap">
+        <span class="intro-video-badge"><span class="live-dot"></span> Veja como funciona</span>
+        <video id="intro-video" autoplay muted loop playsinline poster="poster.jpg">
+          <source src="intro-video.mp4" type="video/mp4">
+        </video>
+        <button class="intro-video-mute" id="btn-mute" aria-label="Ativar som">
+          <svg id="mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        </button>
+      </div>
 
       <div class="intro-stats">
         <div class="stat-item">
@@ -1338,10 +1403,28 @@ function restartQuiz() {
 }
 
 // ============================================
+// VÍDEO — TOGGLE DE SOM
+// ============================================
+function initVideoControls() {
+  const video = $("#intro-video");
+  const btnMute = $("#btn-mute");
+  const muteIcon = $("#mute-icon");
+  if (!video || !btnMute) return;
+
+  btnMute.addEventListener("click", () => {
+    video.muted = !video.muted;
+    muteIcon.innerHTML = video.muted
+      ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>'
+      : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+  });
+}
+
+// ============================================
 // INIT
 // ============================================
 document.addEventListener("DOMContentLoaded", () => {
   initParticles();
+  initVideoControls();
   showScreen("screen-intro");
 
   const btnStart = $("#btn-start");
