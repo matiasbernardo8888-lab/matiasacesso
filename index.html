@@ -412,10 +412,65 @@ body {
 
 .investments-heading {
   display: flex; align-items: center; gap: 12px;
-  font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
-  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+  color: var(--text-white); letter-spacing: -0.01em;
 }
 .investments-heading span { flex: 1; height: 1px; background: var(--border-subtle); }
+.investments-subtitle {
+  font-size: 0.88rem; color: var(--text-muted); line-height: 1.65;
+  max-width: 620px; margin-top: -4px;
+}
+
+/* ---- REVELAÇÃO DOS ATIVOS APÓS SIMULAÇÃO ---- */
+.assets-reveal { display: none; flex-direction: column; gap: 14px; }
+.assets-reveal.visible { display: flex; animation: cardIn 0.5s cubic-bezier(0.4,0,0.2,1) both; }
+.assets-reveal-title {
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
+  color: var(--text-white); display: flex; align-items: center; gap: 8px;
+}
+.asset-lead {
+  font-size: 0.78rem; color: var(--neon); font-weight: 600;
+  display: flex; align-items: center; gap: 6px; margin-bottom: -4px;
+}
+
+/* ---- MINI BENEFÍCIOS (o que você recebe ao continuar) ---- */
+.mini-benefits {
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.mini-benefits-title {
+  font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+  color: var(--text-white);
+}
+.mini-benefits-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.mini-benefits-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+.mini-benefits-list li::before {
+  content: '✓'; width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+  background: rgba(52,211,153,0.15); color: var(--success); font-size: 0.62rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ---- "POR QUE FAZ SENTIDO PRA VOCÊ" ---- */
+.inv-why {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: rgba(56,189,248,0.06); border: 1px solid rgba(56,189,248,0.18);
+  border-radius: var(--radius-sm); padding: 9px 12px; margin-top: 8px;
+}
+.inv-why-icon { font-size: 0.85rem; flex-shrink: 0; line-height: 1.4; }
+.inv-why-text { font-size: 0.76rem; color: var(--text-white); line-height: 1.5; }
+.inv-why-text strong {
+  display: block; font-family: var(--font-display); font-size: 0.66rem;
+  font-weight: 700; color: var(--neon); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 2px;
+}
+
+/* ---- DISCLAIMER LEGAL ---- */
+.legal-disclaimer {
+  font-size: 0.7rem; color: var(--text-dimmer); line-height: 1.6;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); padding: 14px 16px; margin-top: 4px;
+}
 
 /* ---- CARD DE INVESTIMENTO VISÍVEL ---- */
 .inv-card {
@@ -758,7 +813,7 @@ body {
         </svg>
       </button>
 
-      <p class="intro-disclaimer">Nenhuma recomendação de investimento é feita. Apenas informações educacionais.</p>
+      <p class="intro-disclaimer">Conteúdo exclusivamente educacional. As sugestões apresentadas não substituem a análise da sua corretora.</p>
     </div>
   </div>
 
@@ -864,48 +919,12 @@ body {
       <!-- SEÇÃO DE INVESTIMENTOS COMPATÍVEIS -->
       <div class="investments-section">
         <div class="investments-heading">
-          <span></span>
-          Investimentos compatíveis com seu perfil
-          <span></span>
+          SUA CARTEIRA MODELO MTS
         </div>
-
-        <!-- XPML11 — VISÍVEL -->
-        <div class="inv-card">
-          <div class="inv-ticker-wrap">
-            <span class="inv-ticker">XPML11</span>
-            <span class="inv-type-badge fii">FII</span>
-          </div>
-          <div class="inv-info">
-            <div class="inv-name">XP Malls — Fundo de Investimento Imobiliário</div>
-            <div class="inv-desc">FII focado em shopping centers de alto padrão no Brasil. Distribui rendimentos mensais isentos de IR para pessoa física e tem gestão ativa da XP Asset.</div>
-            <div class="inv-tags">
-              <span class="inv-tag">Renda mensal</span>
-              <span class="inv-tag">Isento de IR</span>
-              <span class="inv-tag">Imóveis</span>
-              <span class="inv-tag">Longo prazo</span>
-            </div>
-            <span class="inv-alloc-pill hidden" id="pill-xpml11">📊 Alocação sugerida: <span id="val-xpml11">—</span></span>
-          </div>
-        </div>
-
-        <!-- WIZC3 — VISÍVEL -->
-        <div class="inv-card">
-          <div class="inv-ticker-wrap">
-            <span class="inv-ticker">WIZC3</span>
-            <span class="inv-type-badge acao">Ação</span>
-          </div>
-          <div class="inv-info">
-            <div class="inv-name">Wiz Soluções — Corretora de Seguros</div>
-            <div class="inv-desc">Empresa de distribuição de seguros e serviços financeiros com presença em todo o Brasil. Ação ordinária negociada na B3, com histórico de dividendos e expansão de parcerias.</div>
-            <div class="inv-tags">
-              <span class="inv-tag">Dividendos</span>
-              <span class="inv-tag">Setor financeiro</span>
-              <span class="inv-tag">B3</span>
-              <span class="inv-tag">Médio prazo</span>
-            </div>
-            <span class="inv-alloc-pill acao hidden" id="pill-wizc3">📊 Alocação sugerida: <span id="val-wizc3">—</span></span>
-          </div>
-        </div>
+        <p class="investments-subtitle">
+          Baseado nas suas respostas no quiz, separamos sugestões de ativos que combinam com seu perfil.
+          Informe abaixo quanto você quer começar investindo e veja sua carteira modelo se formar na hora.
+        </p>
 
         <!-- SIMULADOR DE APORTE -->
         <div class="simulator-box" id="simulator-box">
@@ -914,18 +933,18 @@ body {
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
             <div>
-              <div class="simulator-title">Simule sua alocação</div>
-              <div class="simulator-sub">Informe o valor e veja como seria distribuído nos ativos do seu perfil</div>
+              <div class="simulator-title">SIMULE COM SEU VALOR</div>
+              <div class="simulator-sub">Informe quanto você tem e veja um exemplo de como sua carteira modelo ficaria distribuída.</div>
             </div>
           </div>
           <div class="simulator-input-row">
-            <span class="simulator-prefix">R$</span>
+            <span class="simulator-prefix">Tenho R$</span>
             <input
               class="simulator-input"
               id="sim-input"
               type="text"
               inputmode="numeric"
-              placeholder="Ex: 1.000,00"
+              placeholder="_____ pra investir"
               maxlength="15"
               autocomplete="off"
             />
@@ -934,7 +953,7 @@ body {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0">
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
-            Simular alocação
+            Simular minha carteira modelo
           </button>
           <div class="simulator-result" id="sim-result">
             <div class="sim-total-label">Distribuição sugerida para <strong id="sim-total-display" style="color:var(--text-white)"></strong></div>
@@ -972,8 +991,72 @@ body {
               <span class="sim-alloc-pct">40%</span>
             </div>
             <p class="sim-note">
-              Os valores são ilustrativos e baseados em uma distribuição sugerida pelo seu perfil. Nenhum ativo está sendo recomendado — acesse a plataforma completa para personalizar sua carteira.
+              Os valores são ilustrativos e baseados em uma distribuição sugerida pelo seu perfil. Use como exemplo educacional — acesse a plataforma completa para personalizar sua carteira modelo.
             </p>
+          </div>
+        </div>
+
+        <!-- ATIVOS SUGERIDOS — só aparecem depois de simular -->
+        <div class="assets-reveal" id="assets-reveal">
+          <div class="assets-reveal-title">🎉 Prontinho! Veja o FII e a ação sugeridos pra sua carteira:</div>
+
+          <!-- XPML11 — VISÍVEL -->
+          <div class="asset-lead">🏢 Este é o FII sugerido pra você:</div>
+          <div class="inv-card">
+            <div class="inv-ticker-wrap">
+              <span class="inv-ticker">XPML11</span>
+              <span class="inv-type-badge fii">FII</span>
+            </div>
+            <div class="inv-info">
+              <div class="inv-name">XP Malls — Fundo de Investimento Imobiliário</div>
+              <div class="inv-desc">FII focado em shopping centers de alto padrão no Brasil. Distribui rendimentos mensais isentos de IR para pessoa física e tem gestão ativa da XP Asset.</div>
+              <div class="inv-tags">
+                <span class="inv-tag">Renda mensal</span>
+                <span class="inv-tag">Isento de IR</span>
+                <span class="inv-tag">Imóveis</span>
+                <span class="inv-tag">Longo prazo</span>
+              </div>
+              <div class="inv-why">
+                <span class="inv-why-icon">💬</span>
+                <span class="inv-why-text"><strong>Por que faz sentido pra você:</strong>Gera renda mensal + Isento de IR + Prazo longo</span>
+              </div>
+              <span class="inv-alloc-pill hidden" id="pill-xpml11">📊 Alocação sugerida: <span id="val-xpml11">—</span></span>
+            </div>
+          </div>
+
+          <!-- WIZC3 — VISÍVEL -->
+          <div class="asset-lead">📈 Esta é a ação sugerida pra você:</div>
+          <div class="inv-card">
+            <div class="inv-ticker-wrap">
+              <span class="inv-ticker">WIZC3</span>
+              <span class="inv-type-badge acao">Ação</span>
+            </div>
+            <div class="inv-info">
+              <div class="inv-name">Wiz Soluções — Corretora de Seguros</div>
+              <div class="inv-desc">Empresa de distribuição de seguros e serviços financeiros com presença em todo o Brasil. Ação ordinária negociada na B3, com histórico de dividendos e expansão de parcerias.</div>
+              <div class="inv-tags">
+                <span class="inv-tag">Dividendos</span>
+                <span class="inv-tag">Setor financeiro</span>
+                <span class="inv-tag">B3</span>
+                <span class="inv-tag">Médio prazo</span>
+              </div>
+              <div class="inv-why">
+                <span class="inv-why-icon">💬</span>
+                <span class="inv-why-text"><strong>Por que faz sentido pra você:</strong>Setor consolidado + Histórico de dividendos + Boa liquidez na B3</span>
+              </div>
+              <span class="inv-alloc-pill acao hidden" id="pill-wizc3">📊 Alocação sugerida: <span id="val-wizc3">—</span></span>
+            </div>
+          </div>
+
+          <!-- TÓPICOS PERSONALIZADOS -->
+          <div class="mini-benefits">
+            <div class="mini-benefits-title">Ao continuar na plataforma MTS, você também vai ter:</div>
+            <ul class="mini-benefits-list">
+              <li>Acesso à carteira modelo completa, com +8 ativos além destes dois</li>
+              <li>Painel para organizar seus investimentos atuais e futuros em 1 lugar</li>
+              <li>Trilha de conteúdo educacional no seu nível de conhecimento</li>
+              <li>Busca de ativos pelo nome com simulação de valor personalizada</li>
+            </ul>
           </div>
         </div>
 
@@ -1039,6 +1122,12 @@ body {
             🔓 LIBERAR ACESSO
           </button>
         </div>
+
+        <p class="legal-disclaimer">
+          *A MTS Invest não realiza consultoria de valores mobiliários. Todo o conteúdo é de caráter exclusivamente educacional e informativo.
+          Os ativos apresentados são sugestões baseadas no quiz e não constituem recomendação de investimento.
+          Consulte sempre sua corretora antes de investir.*
+        </p>
       </div>
 
       <!-- CTA DESBLOQUEAR (botão principal de conversão) -->
@@ -1065,7 +1154,7 @@ body {
               <polyline points="12 5 19 12 12 19"/>
             </svg>
           </button>
-          <p class="unlock-note">Sem recomendação de investimentos. Plataforma educacional e de organização.</p>
+          <p class="unlock-note">Plataforma educacional e de organização de carteira, sem indicação de compra ou venda de ativos.</p>
         </div>
       </div>
 
@@ -1151,16 +1240,16 @@ const QUESTIONS = [
 // RESULTADO
 // ============================================
 const RESULT_DATA = {
-  title: "Seu perfil está pronto!",
-  intro: "Analisamos suas respostas e identificamos diversas oportunidades e recursos compatíveis com o que você nos contou. Veja o que encontramos:",
+  title: "Sua carteira modelo está pronta!",
+  intro: "Com base no que você respondeu, a MTS gerou sugestões de ativos pra você estudar e decidir com mais clareza. Veja o que preparamos:",
   cards: [
-    { icon: "💡", title: "Investimentos compatíveis", valueKey: "investimentos", desc: "Opções disponíveis dentro do valor que você informou, sem recomendação de qual escolher." },
-    { icon: "📁", title: "Organização de carteira",   valueKey: "carteira",      desc: "Ferramenta para você adicionar e acompanhar seus ativos em um único painel." },
-    { icon: "📚", title: "Conteúdo educacional",      valueKey: "conteudo",      desc: "Materiais selecionados de acordo com o seu nível de conhecimento informado." },
-    { icon: "🔎", title: "Pesquisa de ativos",        valueKey: "pesquisa",      desc: "Busque qualquer investimento pelo nome e veja detalhes antes de tomar qualquer decisão." },
+    { icon: "🧩", title: "Carteira Modelo Automática", valueKey: "investimentos", desc: "Você informa quanto tem disponível, seu prazo e objetivo. A MTS gera uma carteira modelo com sugestões de ativos pra você analisar e investir hoje." },
+    { icon: "🎯", title: "Sugestões Personalizadas",   valueKey: "sugestoes",     desc: "Analisamos +15 tipos de investimentos: Tesouro, CDB, LCI, Ações, FIIs e mais. Mostramos apenas ativos compatíveis com seu perfil e valor informado." },
+    { icon: "📊", title: "Acompanhe Tudo em 1 Lugar",  valueKey: "painel",        desc: "Organize seus investimentos atuais e futuros em um único painel. Veja rentabilidade, vencimento e novas sugestões de ativos." },
+    { icon: "📚", title: "Aprenda Enquanto Investe",   valueKey: "conteudo",      desc: "Conteúdo educacional direto ao ponto baseado no seu nível de conhecimento. Do zero ao avançado, sem enrolação." },
   ],
   unlockItems: [
-    "Explore investimentos compatíveis com o seu valor disponível",
+    "Veja sua carteira modelo completa com sugestões de ativos",
     "Organize e visualize toda a sua carteira em um lugar",
     "Acesse conteúdos educacionais para evoluir no mercado financeiro",
     "Pesquise ativos pelo nome e adicione à sua carteira",
@@ -1172,9 +1261,9 @@ function buildResultValues(ans) {
   const inv = { ate500: "Mais de 15 opções", "500a2k": "Mais de 30 opções", "2ka10k": "Mais de 60 opções", acima10k: "Mais de 100 opções" };
   return {
     investimentos: inv[ans[0]] || "Diversas opções",
-    carteira:      "Disponível para seus ativos atuais",
+    sugestoes:     "+15 tipos analisados",
+    painel:        "Ativos, rentabilidade e vencimento",
     conteudo:      (ans[3] === "iniciante" || ans[3] === "basico") ? "Trilha para iniciantes selecionada" : "Trilha intermediária/avançada",
-    pesquisa:      "Busca por nome + simulação de valor",
   };
 }
 
